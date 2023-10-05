@@ -68,4 +68,37 @@ public class CuartelData {
             JOptionPane.showMessageDialog(null,"error al modificar Cuartel"+ex);
         }
     }
+    public Cuartel buscarCuartel (int id){
+// SELECT * FROM `cuartel` WHERE 1   `CodCuartel``NombreCuartel``Direccion``CoorX``CoorY``Telefono``Correo`
+        String sql = "SELECT NombreCuartel, Direccion, CoorX, CoorY,Telefono,Correo FROM cuartel WHERE  CodCuartel = ?" ;
+        
+        Cuartel cuartel=null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                
+                cuartel=new Cuartel();
+               cuartel.setCodCuartel(id);
+                cuartel.setNombreCuartel(rs.getString("NombreCuartel"));
+                cuartel.setDireccion(rs.getString("Direccion"));
+                cuartel.setCoorX(rs.getInt("CoorX"));
+                cuartel.setCoorY(rs.getInt("CoorY"));
+                cuartel.setTelefono(rs.getString("Telefono"));
+               cuartel.setCorreo(rs.getString("Correo"));
+
+            } else {
+                            
+                JOptionPane.showMessageDialog(null, "Cuartel no encontrado con ese ID");
+                
+            }
+                ps.close();   
+                    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel");
+        }
+    
+            return cuartel;
+}
 }

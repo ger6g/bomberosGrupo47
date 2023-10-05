@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class BrigadaData {
     private Connection con=null;
+    private CuartelData brid=new CuartelData();
     public BrigadaData(){
     con=Conexion.getConexion();
     }
@@ -48,4 +49,37 @@ public class BrigadaData {
             JOptionPane.showMessageDialog(null,"error al agregar brigada");
         }
     }
+    
+     public Brigada buscarBrigada (int id){
+//SELECT `NombreBr``Especialidad``Libre``NroCuartel` FROM `brigada` WHERE `CodBrigada`
+        String sql = "SELECT NombreBr, Especialidad, Libre, NroCuartel FROM brigada WHERE  CodBrigada = ?" ;
+        
+        Brigada brigada=null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                
+                brigada=new Brigada();
+               brigada.setCodBrigada(id);
+                brigada.setNombreBr(rs.getString("NombreBr"));
+                brigada.setEspecialidad(rs.getString("Especialidad"));
+                brigada.setLibre(true);
+               Cuartel cuartel=brid.buscarCuartel(rs.getInt("NroCuartel"));
+               brigada.setCuartel(cuartel);
+
+            } else {
+                            
+                JOptionPane.showMessageDialog(null, "Brigada no encontrado con ese ID");
+                
+            }
+                ps.close();   
+                    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        }
+    
+            return brigada;
+}
 }
