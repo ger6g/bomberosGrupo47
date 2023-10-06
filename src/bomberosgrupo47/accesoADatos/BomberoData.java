@@ -35,7 +35,7 @@ public class BomberoData {
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, bombero.getDni());
             ps.setString(2, bombero.getNombreApellido());
-//          ps.setDate(3,Date.valueOf(bombero.getFechaNac()));
+            //ps.setDate(3,Date.valueOf(bombero.getFechaNac()));
             ps.setDate(3,bombero.getFechaNac());
             ps.setString(4, bombero.getCelular());
             ps.setInt(5, bombero.getBrigada().getCodBrigada());
@@ -115,4 +115,25 @@ public class BomberoData {
     
             return bombero;
 } 
+    public void bajaBombero(int id){
+        String sql = "DELETE FROM bombero WHERE idBombero = ?";
+
+    try (PreparedStatement statement = con.prepareStatement(sql)) {
+        // Establece el valor del parámetro
+        statement.setInt(1, id);
+
+        // Ejecuta la sentencia DELETE
+        int rowsAffected = statement.executeUpdate();
+
+        // Verifica si se eliminó correctamente el bombero
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Bombero dado de Baja");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el Bombero con el ID especificado");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
 }
+    }
+
