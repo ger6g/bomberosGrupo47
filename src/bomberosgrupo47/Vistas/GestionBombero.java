@@ -5,19 +5,53 @@
  */
 package bomberosgrupo47.Vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JDesktopPane;
+
 /**
  *
  * @author hecto
  */
 public class GestionBombero extends javax.swing.JFrame {
+//    private escritorioP escritorio;
 
     /**
      * Creates new form GestionBombero
      */
     public GestionBombero() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setSize(1300, 600);
+        transparencia();
+//        escritorio= new escritorioP();
+//        this.setContentPane(escritorio);
     }
+    
+public void transparencia(){
+jButton1.setOpaque(false);
+jButton1.setContentAreaFilled(false);
+jButton1.setBorderPainted(false);
 
+jBbrigada.setOpaque(false);
+jBbrigada.setContentAreaFilled(false);
+jBbrigada.setBorderPainted(false);
+
+jBcuartel.setOpaque(false);
+jBcuartel.setContentAreaFilled(false);
+jBcuartel.setBorderPainted(false);
+
+jBbombero.setOpaque(false);
+jBbombero.setContentAreaFilled(false);
+jBbombero.setBorderPainted(false);
+
+jBsiniestro.setOpaque(false);
+jBsiniestro.setContentAreaFilled(false);
+jBsiniestro.setBorderPainted(false);
+
+
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,40 +61,313 @@ public class GestionBombero extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/fondobom.jpg"));
+        Image gen= icono.getImage();
+        jDesktopPane1 = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(gen,0,0,getWidth(),getHeight(),this);
+
+            }
+        };
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jBbrigada = new javax.swing.JButton();
+        jBcuartel = new javax.swing.JButton();
+        jBbombero = new javax.swing.JButton();
+        jBsiniestro = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMCuartel = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(160, 100));
+        setPreferredSize(new java.awt.Dimension(1304, 600));
+        setResizable(false);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bSalir.png"))); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton1MouseExited(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
+
+        jBbrigada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bBrigada.png"))); // NOI18N
+        jBbrigada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBbrigadaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBbrigadaMouseExited(evt);
+            }
+        });
+
+        jBcuartel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bCuartel.png"))); // NOI18N
+        jBcuartel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBcuartelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBcuartelMouseExited(evt);
+            }
+        });
+        jBcuartel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcuartelActionPerformed(evt);
+            }
+        });
+
+        jBbombero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bBombero.png"))); // NOI18N
+        jBbombero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBbomberoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBbomberoMouseExited(evt);
+            }
+        });
+
+        jBsiniestro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bSiniestro.png"))); // NOI18N
+        jBsiniestro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBsiniestroMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBsiniestroMouseExited(evt);
+            }
+        });
+
+        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jBbrigada, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jBcuartel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jBbombero, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jBsiniestro, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(333, Short.MAX_VALUE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(243, 243, 243)
+                        .addComponent(jBcuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBsiniestro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBbrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBbombero, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 226, Short.MAX_VALUE)
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBsiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jBcuartel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)))
+                .addComponent(jButton1)
+                .addGap(37, 37, 37))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(jBbrigada)
+                .addGap(42, 42, 42)
+                .addComponent(jBbombero, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jMCuartel.setText("Cuartel");
+        jMCuartel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMCuartelActionPerformed(evt);
+            }
+        });
+
+        jMenuItem7.setText("Formulario Cuartel");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMCuartel.add(jMenuItem7);
+
+        jMenuBar1.add(jMCuartel);
+
+        jMenu2.setText("Brigada");
+
+        jMenuItem1.setText("Formulario Brigada");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Bombero");
+
+        jMenuItem8.setText("Formulario Bomberos");
+        jMenu3.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Siniestro");
+
+        jMenuItem4.setText("formulario Siniestro");
+        jMenu4.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Consultas");
+
+        jMenuItem5.setText("Bomberos por brigada");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem5);
+
+        jMenuItem6.setText("Brigadas por cuartel");
+        jMenu5.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu5);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
+        // TODO add your handling code here:
+        
+        jLabel1.setText("     SALIR");
+    }//GEN-LAST:event_jButton1MouseEntered
+
+    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
+        // TODO add your handling code here:
+        
+        jLabel1.setText("");
+    }//GEN-LAST:event_jButton1MouseExited
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMCuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCuartelActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jMCuartelActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+//        jDesktopPane1.removeAll();
+//        jDesktopPane1.repaint();
+        cuartelVista cua=new cuartelVista();
+        cua.setVisible(true);
+        jDesktopPane1.add(cua);
+        jDesktopPane1.moveToFront(cua);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jBbrigadaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBbrigadaMouseEntered
+        // TODO add your handling code here:
+        jLabel1.setText("   BRIGADA");
+    }//GEN-LAST:event_jBbrigadaMouseEntered
+
+    private void jBbrigadaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBbrigadaMouseExited
+        // TODO add your handling code here:
+        jLabel1.setText("");
+    }//GEN-LAST:event_jBbrigadaMouseExited
+
+    private void jBcuartelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBcuartelMouseEntered
+        // TODO add your handling code here:
+        jLabel1.setText("   CUARTEL");
+    }//GEN-LAST:event_jBcuartelMouseEntered
+
+    private void jBcuartelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBcuartelMouseExited
+        // TODO add your handling code here:
+        jLabel1.setText("");
+    }//GEN-LAST:event_jBcuartelMouseExited
+
+    private void jBbomberoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBbomberoMouseEntered
+        // TODO add your handling code here:
+        jLabel1.setText("BOMBEROS");
+    }//GEN-LAST:event_jBbomberoMouseEntered
+
+    private void jBbomberoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBbomberoMouseExited
+        // TODO add your handling code here:
+        jLabel1.setText("");
+    }//GEN-LAST:event_jBbomberoMouseExited
+
+    private void jBsiniestroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBsiniestroMouseEntered
+        // TODO add your handling code here:
+        jLabel1.setText(" SINIESTRO");
+    }//GEN-LAST:event_jBsiniestroMouseEntered
+
+    private void jBsiniestroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBsiniestroMouseExited
+        // TODO add your handling code here:
+        jLabel1.setText("");
+    }//GEN-LAST:event_jBsiniestroMouseExited
+
+    private void jBcuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcuartelActionPerformed
+        // Boton del menu principal
+        cuartelVista cua=new cuartelVista();
+        cua.setVisible(true);
+        jDesktopPane1.add(cua);
+        jDesktopPane1.moveToFront(cua);
+    }//GEN-LAST:event_jBcuartelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,6 +395,7 @@ public class GestionBombero extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GestionBombero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -98,6 +406,24 @@ public class GestionBombero extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jBbombero;
+    private javax.swing.JButton jBbrigada;
+    private javax.swing.JButton jBcuartel;
+    private javax.swing.JButton jBsiniestro;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMCuartel;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 }
