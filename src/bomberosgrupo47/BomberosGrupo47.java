@@ -29,7 +29,7 @@ public class BomberosGrupo47 {
 //        cuda.guardarCuartel(cuar);
 //        
 //        Brigada bri=new Brigada("alfa2","fire",true,cuar);
-          BrigadaData briD=new BrigadaData();
+//          BrigadaData briD=new BrigadaData();
 //        briD.guardarBrigada(bri);
 //          System.out.println(briD.buscarBrigada(5).toString());
 //       
@@ -41,12 +41,12 @@ public class BomberosGrupo47 {
 //         SiniestroData m1=new SiniestroData();
 //         m1.guardarSiniestro(lare);
 
-BomberoData bom2=new BomberoData();
-Brigada bri=new Brigada();
-bri=briD.buscarBrigada(5);
-Bombero bom=new Bombero(1,123,"llama saka",Date.valueOf(LocalDate.of(1990, 4, 23)),"123",bri);
-//bom2.modificarBombero(bom);
-System.out.println(bom2.buscarBombero(1));
+//BomberoData bom2=new BomberoData();
+//Brigada bri=new Brigada();
+//bri=briD.buscarBrigada(5);
+//Bombero bom=new Bombero(1,123,"llama saka",Date.valueOf(LocalDate.of(1990, 4, 23)),"123",bri);
+////bom2.modificarBombero(bom);
+//System.out.println(bom2.buscarBombero(1));
     }
     
 }
