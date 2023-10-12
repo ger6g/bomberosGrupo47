@@ -6,6 +6,7 @@
 package bomberosgrupo47.entidades;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -15,17 +16,27 @@ public class Siniestro {
 //    `Codigo``tipo``FechaSiniestro``CoordX``CoordY``Detalles``FechaResol``Puntuacion``CodBrigada`
     private int Codigo;
     private String tipo;
-    private Date FechaSiniestro;
+    private LocalDate FechaSiniestro;
     private int CoordX,CoordY;
     private String Detalles;
-    private Date FechaResol;
+    private LocalDate FechaResol;
     private int Puntuacion;
     private Brigada brigada;
 
     public Siniestro() {
     }
 
-    public Siniestro(int Codigo, String tipo, Date FechaSiniestro, int CoordX, int CoordY, String Detalles, Date FechaResol, int Puntuacion, Brigada brigada) {
+    public Siniestro(String tipo, LocalDate FechaSiniestro, int CoordX, int CoordY, String Detalles, int Puntuacion) {
+        this.tipo = tipo;
+        this.FechaSiniestro = FechaSiniestro;
+        this.CoordX = CoordX;
+        this.CoordY = CoordY;
+        this.Detalles = Detalles;
+        this.Puntuacion = Puntuacion;
+    }
+    
+
+    public Siniestro(int Codigo, String tipo, LocalDate FechaSiniestro, int CoordX, int CoordY, String Detalles, LocalDate FechaResol, int Puntuacion, Brigada brigada) {
         this.Codigo = Codigo;
         this.tipo = tipo;
         this.FechaSiniestro = FechaSiniestro;
@@ -37,7 +48,7 @@ public class Siniestro {
         this.brigada = brigada;
     }
 
-    public Siniestro(String tipo, Date FechaSiniestro, int CoordX, int CoordY, String Detalles, Date FechaResol, int Puntuacion, Brigada brigada) {
+    public Siniestro(String tipo, LocalDate FechaSiniestro, int CoordX, int CoordY, String Detalles, LocalDate FechaResol, int Puntuacion, Brigada brigada) {
         this.tipo = tipo;
         this.FechaSiniestro = FechaSiniestro;
         this.CoordX = CoordX;
@@ -64,11 +75,11 @@ public class Siniestro {
         this.tipo = tipo;
     }
 
-    public Date getFechaSiniestro() {
+    public LocalDate getFechaSiniestro() {
         return FechaSiniestro;
     }
 
-    public void setFechaSiniestro(Date FechaSiniestro) {
+    public void setFechaSiniestro(LocalDate FechaSiniestro) {
         this.FechaSiniestro = FechaSiniestro;
     }
 
@@ -96,11 +107,11 @@ public class Siniestro {
         this.Detalles = Detalles;
     }
 
-    public Date getFechaResol() {
+    public LocalDate getFechaResol() {
         return FechaResol;
     }
 
-    public void setFechaResol(Date FechaResol) {
+    public void setFechaResol(LocalDate FechaResol) {
         this.FechaResol = FechaResol;
     }
 

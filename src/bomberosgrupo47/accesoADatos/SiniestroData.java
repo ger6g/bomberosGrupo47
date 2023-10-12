@@ -5,12 +5,15 @@
  */
 package bomberosgrupo47.accesoADatos;
 
+import bomberosgrupo47.entidades.Brigada;
 import bomberosgrupo47.entidades.Siniestro;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class SiniestroData {
       private Connection con=null;
+      private BrigadaData bd=new BrigadaData();
     public SiniestroData(){
     con=Conexion.getConexion();
     }
@@ -31,11 +35,11 @@ public class SiniestroData {
         try {
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1,siniestro.getTipo());
-            ps.setDate(2,siniestro.getFechaSiniestro());
+            ps.setDate(2,Date.valueOf(siniestro.getFechaSiniestro()));
             ps.setInt(3,siniestro.getCoordX());
             ps.setInt(4,siniestro.getCoordY());
             ps.setString(5, siniestro.getDetalles());
-            ps.setDate(6,siniestro.getFechaResol());
+            ps.setDate(6,Date.valueOf(siniestro.getFechaResol()));
             ps.setInt(7,siniestro.getPuntuacion());
             ps.setInt(8,siniestro.getBrigada().getCodBrigada());
             ps.executeUpdate();
@@ -52,6 +56,65 @@ public class SiniestroData {
         }
         
     }
+     public void modificarSiniestro(Siniestro siniestro){
+//         UPDATE `siniestro` SET `Codigo`='[value-1]',`tipo`='[value-2]',`FechaSiniestro`='[value-3]',`CoordX`='[value-4]',`CoordY`='[value-5]',`Detalles`='[value-6]',`FechaResol`='[value-7]',`Puntuacion`='[value-8]',`CodBrigada`='[value-9]' WHERE 1
+         
+    String sql="UPDATE siniestro SET tipo=?,FechaSiniestro=?, CoorX=?, CoorY=?,Detalles=?,FechaResol=?,Puntuacion=?,CodBrigada=? WHERE Codigo=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setString(1, siniestro.getTipo());
+            ps.setDate(2,Date.valueOf(siniestro.getFechaSiniestro()));
+            ps.setInt(3,siniestro.getCoordX());
+            ps.setInt(4,siniestro.getCoordY());
+            ps.setString(5, siniestro.getDetalles());
+            ps.setDate(6, Date.valueOf(siniestro.getFechaResol()));
+            ps.setInt(7, siniestro.getPuntuacion());
+            ps.setInt(8,siniestro.getBrigada().getCodBrigada());
+            int e= ps.executeUpdate();
+            System.out.println(""+e);
+            if (e==1) {
+                JOptionPane.showMessageDialog(null,"Siniestro modificado");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"error al modificar Siniestro"+ex);
+        }
+    }
+    
+    
+    public ArrayList<Siniestro> obtenerSiniestro (){
+
+    ArrayList<Siniestro> siniestros= new ArrayList();
+    String sql="SELECT * FROM siniestro";
+
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+           ResultSet rs= ps.executeQuery();
+            while (rs.next()) {
+               Siniestro sinie= new Siniestro();
+               sinie.setCodigo(rs.getInt("Codigo"));
+               sinie.setTipo(rs.getString("tipo"));
+               sinie.setTipo(rs.getString("tipo"));
+               sinie.setFechaSiniestro(rs.getDate("FechaSiniestro").toLocalDate());
+               sinie.setCoordX(rs.getInt("CoordX"));
+               sinie.setCoordY(rs.getInt("CoordY"));
+               sinie.setDetalles(rs.getString("Detalles"));
+               sinie.setFechaResol(rs.getDate("FechaResol").toLocalDate());
+               
+               sinie.setPuntuacion(rs.getInt("Puntuacion"));
+               Brigada bri =bd.buscarBrigada(rs.getInt("CodBrigada"));
+               
+               sinie.setBrigada(bri);
+               
+               
+               siniestros.add(sinie);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
+        }
+       return siniestros;
+}
     
     
 }

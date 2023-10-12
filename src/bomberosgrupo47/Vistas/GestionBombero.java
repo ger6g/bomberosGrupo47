@@ -121,6 +121,11 @@ jBsiniestro.setBorderPainted(false);
                 jBbrigadaMouseExited(evt);
             }
         });
+        jBbrigada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbrigadaActionPerformed(evt);
+            }
+        });
 
         jBcuartel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bCuartel.png"))); // NOI18N
         jBcuartel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,6 +159,11 @@ jBsiniestro.setBorderPainted(false);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jBsiniestroMouseExited(evt);
+            }
+        });
+        jBsiniestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBsiniestroActionPerformed(evt);
             }
         });
 
@@ -368,6 +378,19 @@ jBsiniestro.setBorderPainted(false);
         jDesktopPane1.add(cua);
         jDesktopPane1.moveToFront(cua);
     }//GEN-LAST:event_jBcuartelActionPerformed
+
+    private void jBbrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbrigadaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jBbrigadaActionPerformed
+
+    private void jBsiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsiniestroActionPerformed
+        // TODO add your handling code here:
+        SiniestroVista sinies=new SiniestroVista();
+        sinies.setVisible(true);
+        jDesktopPane1.add(sinies);
+        jDesktopPane1.moveToFront(sinies);
+    }//GEN-LAST:event_jBsiniestroActionPerformed
 
     /**
      * @param args the command line arguments
