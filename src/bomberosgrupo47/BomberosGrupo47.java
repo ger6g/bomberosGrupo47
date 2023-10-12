@@ -16,15 +16,10 @@ import bomberosgrupo47.entidades.Siniestro;
 import java.sql.Date;
 import java.time.LocalDate;
 
-/**
- *
- * @author hecto
- */
+
 public class BomberosGrupo47 {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         // TODO code application logic here
 //        Cuartel cuar=new Cuartel(1,"llamaMoto","falsa123",123,121,"0303456","no tiene");
