@@ -19,6 +19,7 @@ public class Bombero {
     private Date FechaNac;
     private String Celular;
     private Brigada brigada;
+    
 
     public Bombero() {
     }

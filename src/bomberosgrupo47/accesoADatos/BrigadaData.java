@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -82,4 +83,50 @@ public class BrigadaData {
     
             return brigada;
 }
+     
+
+      public ArrayList<Brigada> buscarBrigadaPorCuartel (int id){
+//SELECT `NombreBr``Especialidad``Libre``NroCuartel` FROM `brigada` WHERE `CodBrigada`
+
+//     SELECT `CodBrigada`, `NombreBr`, `Especialidad`, `Libre` FROM `brigada` WHERE NroCuartel=?
+        String sql = "SELECT CodBrigada, NombreBr, Especialidad, Libre, NroCuartel FROM brigada WHERE  NroCuartel = ?" ;
+        
+        
+        ArrayList<Brigada> brig = new ArrayList();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+//            while (rs.next()) {
+//                inscripcion insc = new inscripcion();
+//                insc.setIdIscripcion(rs.getInt("idIscripcion"));
+//                alumno alu = ad.buscarAlumno(rs.getInt("idAlumno"));
+//                materia mat = md.buscarMateriaId(rs.getInt("idMateria"));
+//                insc.setAlumno(alu);
+//                insc.setMateria(mat);
+//                insc.setNota(rs.getDouble("nota"));
+//                cursadas.add(insc);
+//            }
+//            ps.close();
+            while(rs.next()){
+                Brigada brigada=new Brigada();
+               
+                brigada.setCodBrigada(rs.getInt("CodBrigada"));
+                brigada.setNombreBr(rs.getString("NombreBr"));
+                brigada.setEspecialidad(rs.getString("Especialidad"));
+                brigada.setLibre(true);
+               Cuartel cuartel=brid.buscarCuartel(rs.getInt("NroCuartel"));
+               brigada.setCuartel(cuartel);
+               brig.add(brigada);
+
+            }
+                ps.close();   
+                    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        }
+    
+            return brig;
+}
+     
 }

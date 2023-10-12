@@ -15,11 +15,12 @@ public class Cuartel {
     private String NombreCuartel,Direccion;
     private int CoorX,CoorY;
     private String Telefono,Correo;
+    private boolean activo;
 
     public Cuartel() {
     }
 
-    public Cuartel(int CodCuartel, String NombreCuartel, String Direccion, int CoorX, int CoorY, String Telefono, String Correo) {
+    public Cuartel(int CodCuartel, String NombreCuartel, String Direccion, int CoorX, int CoorY, String Telefono, String Correo,boolean activo) {
         this.CodCuartel = CodCuartel;
         this.NombreCuartel = NombreCuartel;
         this.Direccion = Direccion;
@@ -29,7 +30,7 @@ public class Cuartel {
         this.Correo = Correo;
     }
 
-    public Cuartel(String NombreCuartel, String Direccion, int CoorX, int CoorY, String Telefono, String Correo) {
+    public Cuartel(String NombreCuartel, String Direccion, int CoorX, int CoorY, String Telefono, String Correo,boolean activo) {
         this.NombreCuartel = NombreCuartel;
         this.Direccion = Direccion;
         this.CoorX = CoorX;
@@ -93,6 +94,15 @@ public class Cuartel {
     public void setCorreo(String Correo) {
         this.Correo = Correo;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
 
     @Override
     public String toString() {
