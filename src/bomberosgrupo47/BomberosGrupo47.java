@@ -15,6 +15,8 @@ import bomberosgrupo47.entidades.Cuartel;
 import bomberosgrupo47.entidades.Siniestro;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class BomberosGrupo47 {
@@ -47,6 +49,20 @@ public class BomberosGrupo47 {
 //Bombero bom=new Bombero(1,123,"llama saka",Date.valueOf(LocalDate.of(1990, 4, 23)),"123",bri);
 ////bom2.modificarBombero(bom);
 //System.out.println(bom2.buscarBombero(1));
+
+CuartelData da=new CuartelData();
+//Cuartel cua=new Cuartel();
+//cua=da.buscarCuartel(1);
+//        System.out.println(cua.toString());
+
+        ArrayList<Cuartel> Cuarteles = da.listarcuartel();
+        Iterator<Cuartel> Iterator2 = Cuarteles.iterator();
+        while (Iterator2.hasNext()) {
+            Cuartel elemento = Iterator2.next();
+            System.out.print(elemento.toString());
+
+        }
+        
     }
     
 }

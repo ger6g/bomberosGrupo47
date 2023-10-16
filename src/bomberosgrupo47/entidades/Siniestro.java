@@ -26,13 +26,13 @@ public class Siniestro {
     public Siniestro() {
     }
 
-    public Siniestro(String tipo, LocalDate FechaSiniestro, int CoordX, int CoordY, String Detalles, int Puntuacion) {
+    public Siniestro(String tipo, LocalDate FechaSiniestro, int CoordX, int CoordY, String Detalles,  Brigada brigada) {
         this.tipo = tipo;
         this.FechaSiniestro = FechaSiniestro;
         this.CoordX = CoordX;
         this.CoordY = CoordY;
         this.Detalles = Detalles;
-        this.Puntuacion = Puntuacion;
+        this.brigada = brigada;
     }
     
 
@@ -133,7 +133,7 @@ public class Siniestro {
 
     @Override
     public String toString() {
-        return "Siniestro{" + "Codigo=" + Codigo + ", tipo=" + tipo + ", FechaSiniestro=" + FechaSiniestro + ", CoordX=" + CoordX + ", CoordY=" + CoordY + ", Detalles=" + Detalles + ", FechaResol=" + FechaResol + ", Puntuacion=" + Puntuacion + ", brigada=" + brigada + '}';
+        return "Siniestro" + " Cod=" + Codigo + "," + tipo;
     }
 
     

@@ -56,10 +56,42 @@ public class SiniestroData {
         }
         
     }
+    
+    public void guardarSinResolver(Siniestro siniestro){
+//     `siniestro``Codigo``tipo``FechaSiniestro``CoordX``CoordY``Detalles``FechaResol``Puntuacion``CodBrigada`
+// INSERT INTO `siniestro`( `tipo`, `FechaSiniestro`, `CoordX`, `CoordY`, `Detalles`, `FechaResol`, `Puntuacion`, `CodBrigada`) 
+    String sql="INSERT INTO siniestro (tipo,FechaSiniestro,CoordX, CoordY, Detalles,CodBrigada)"
+                + "VALUES (?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1,siniestro.getTipo());
+            ps.setDate(2,Date.valueOf(siniestro.getFechaSiniestro()));
+            ps.setInt(3,siniestro.getCoordX());
+            ps.setInt(4,siniestro.getCoordY());
+            ps.setString(5, siniestro.getDetalles());
+//            ps.setDate(6,Date.valueOf(siniestro.getFechaResol()));
+//            ps.setInt(7,siniestro.getPuntuacion());
+            ps.setInt(6,siniestro.getBrigada().getCodBrigada());
+            ps.executeUpdate();
+            
+            ResultSet rs=ps.getGeneratedKeys();
+            if (rs.next()) {
+                
+                siniestro.setCodigo(rs.getInt(1));
+                JOptionPane.showMessageDialog(null,"Siniestro agregado");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"error al agregar Siniestro"+ex);
+        }
+        
+    }
+    
+    
      public void modificarSiniestro(Siniestro siniestro){
 //         UPDATE `siniestro` SET `Codigo`='[value-1]',`tipo`='[value-2]',`FechaSiniestro`='[value-3]',`CoordX`='[value-4]',`CoordY`='[value-5]',`Detalles`='[value-6]',`FechaResol`='[value-7]',`Puntuacion`='[value-8]',`CodBrigada`='[value-9]' WHERE 1
          
-    String sql="UPDATE siniestro SET tipo=?,FechaSiniestro=?, CoorX=?, CoorY=?,Detalles=?,FechaResol=?,Puntuacion=?,CodBrigada=? WHERE Codigo=?";
+    String sql="UPDATE siniestro SET tipo=?,FechaSiniestro=?, CoordX=?, CoordY=?,Detalles=?,FechaResol=?,Puntuacion=?,CodBrigada=? WHERE Codigo=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setString(1, siniestro.getTipo());
@@ -70,6 +102,7 @@ public class SiniestroData {
             ps.setDate(6, Date.valueOf(siniestro.getFechaResol()));
             ps.setInt(7, siniestro.getPuntuacion());
             ps.setInt(8,siniestro.getBrigada().getCodBrigada());
+            ps.setInt(9,siniestro.getCodigo());
             int e= ps.executeUpdate();
             System.out.println(""+e);
             if (e==1) {
@@ -80,6 +113,30 @@ public class SiniestroData {
         }
     }
     
+      public void modificarSinResolver(Siniestro siniestro){
+//         UPDATE `siniestro` SET `Codigo`='[value-1]',`tipo`='[value-2]',`FechaSiniestro`='[value-3]',`CoordX`='[value-4]',`CoordY`='[value-5]',`Detalles`='[value-6]',`FechaResol`='[value-7]',`Puntuacion`='[value-8]',`CodBrigada`='[value-9]' WHERE 1
+         
+    String sql="UPDATE siniestro SET tipo=?,FechaSiniestro=?, CoordX=?, CoordY=?,Detalles=?,CodBrigada=? WHERE Codigo=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setString(1, siniestro.getTipo());
+            ps.setDate(2,Date.valueOf(siniestro.getFechaSiniestro()));
+            ps.setInt(3,siniestro.getCoordX());
+            ps.setInt(4,siniestro.getCoordY());
+            ps.setString(5, siniestro.getDetalles());
+            
+            
+            ps.setInt(6,siniestro.getBrigada().getCodBrigada());
+            ps.setInt(7,siniestro.getCodigo());
+            int e= ps.executeUpdate();
+            System.out.println(""+e);
+            if (e==1) {
+                JOptionPane.showMessageDialog(null,"Siniestro modificado");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"error al modificar Siniestro"+ex);
+        }
+    }
     
     public ArrayList<Siniestro> obtenerSiniestro (){
 
@@ -115,6 +172,76 @@ public class SiniestroData {
         }
        return siniestros;
 }
+//    SELECT * FROM `siniestro` WHERE `Codigo`
+    public Siniestro buscarSiniestro(int codigo) {
+//`Codigo``tipo``FechaSiniestro``CoordX``CoordY``Detalles``FechaResol``Puntuacion``CodBrigada`
+        String sql = "SELECT Codigo, tipo, FechaSiniestro, CoordX, CoordY, Detalles, FechaResol, Puntuacion, CodBrigada FROM siniestro WHERE Codigo = ?";
+
+        Siniestro siniestro = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                siniestro = new Siniestro();
+
+                siniestro.setCodigo(rs.getInt("Codigo"));
+                siniestro.setTipo(rs.getString("tipo"));
+                siniestro.setFechaSiniestro(rs.getDate("FechaSiniestro").toLocalDate());
+                siniestro.setCoordX(rs.getInt("CoordX"));
+                siniestro.setCoordY(rs.getInt("CoordY"));
+                siniestro.setDetalles(rs.getString("Detalles"));
+                if (rs.getDate("FechaResol")!=null) {
+                    siniestro.setFechaResol(rs.getDate("FechaResol").toLocalDate());
+                    siniestro.setPuntuacion(rs.getInt("Puntuacion"));
+                }
+                
+                Brigada brigada = bd.buscarBrigada(rs.getInt("CodBrigada"));
+                siniestro.setBrigada(brigada);
+                
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "SINIESTRO no encontrado con ese CODIGO");
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla SINIESTRO");
+        }
+        return siniestro;
+    }
     
+    public ArrayList<Siniestro> obtenerSiniestro2 (){
+
+    ArrayList<Siniestro> siniestros= new ArrayList();
+    String sql="SELECT * FROM siniestro";
+
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+           ResultSet rs= ps.executeQuery();
+            while (rs.next()) {
+               Siniestro sinie= new Siniestro();
+               sinie.setCodigo(rs.getInt("Codigo"));
+               sinie.setTipo(rs.getString("tipo"));
+               
+               sinie.setDetalles(rs.getString("Detalles"));
+               
+               
+              
+               
+               
+               siniestros.add(sinie);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
+        }
+       return siniestros;
+}
+
     
 }

@@ -102,11 +102,13 @@ public class Cuartel {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
 
     @Override
     public String toString() {
-        return "Cuartel{" + "CodCuartel=" + CodCuartel + ", NombreCuartel=" + NombreCuartel + ", Direccion=" + Direccion + ", CoorX=" + CoorX + ", CoorY=" + CoorY + ", Telefono=" + Telefono + ", Correo=" + Correo + '}';
+        return "Cuartel{" + "CodCuartel=" + CodCuartel + ", NombreCuartel=" + NombreCuartel + ", Direccion=" + Direccion + ", CoorX=" + CoorX + ", CoorY=" + CoorY + ", Telefono=" + Telefono + ", Correo=" + Correo + ", activo=" + activo + '}';
     }
+    
+
+   
     
 }

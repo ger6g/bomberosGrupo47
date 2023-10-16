@@ -137,4 +137,40 @@ public class CuartelData {
         
 
     }
+    
+    public ArrayList<Cuartel> listarcuartel() {
+
+        String sql = "SELECT * FROM cuartel WHERE estado = 1";
+
+        ArrayList<Cuartel> Cuarteles = new ArrayList();
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs=ps.executeQuery();
+            
+            while (rs.next()) {
+
+                Cuartel cuartel = new Cuartel();
+                cuartel.setCodCuartel(rs.getInt("CodCuartel"));
+                cuartel.setNombreCuartel(rs.getString("NombreCuartel"));
+                cuartel.setDireccion(rs.getString("Direccion"));
+                cuartel.setCoorX(rs.getInt("CoorX"));
+                cuartel.setCoorY(rs.getInt("CoorY"));
+                cuartel.setTelefono(rs.getString("Telefono"));
+                cuartel.setCorreo(rs.getString("Correo"));
+                cuartel.setActivo(true);
+               
+                
+                
+                Cuarteles.add(cuartel);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Cuarteles"+ex);
+        }
+
+        return Cuarteles;
+    }
 }

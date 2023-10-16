@@ -114,7 +114,7 @@ public class BrigadaData {
                 brigada.setCodBrigada(rs.getInt("CodBrigada"));
                 brigada.setNombreBr(rs.getString("NombreBr"));
                 brigada.setEspecialidad(rs.getString("Especialidad"));
-                brigada.setLibre(true);
+                brigada.setLibre(rs.getBoolean("Libre"));
                Cuartel cuartel=brid.buscarCuartel(rs.getInt("NroCuartel"));
                brigada.setCuartel(cuartel);
                brig.add(brigada);
@@ -128,5 +128,59 @@ public class BrigadaData {
     
             return brig;
 }
+      public ArrayList<Brigada> listarBPorEspecialidad(String espe) {
+
+        String sql = "SELECT * FROM brigada WHERE especialidad = ? AND Libre=1";
+
+        ArrayList<Brigada> brigadas = new ArrayList();
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, espe);
+            ResultSet rs=ps.executeQuery();
+            
+            while (rs.next()) {
+
+                Brigada brigada = new Brigada();
+                brigada.setCodBrigada(rs.getInt("codBrigada"));
+                brigada.setNombreBr(rs.getString("nombre_br"));
+                brigada.setEspecialidad(rs.getString("especialidad"));
+                brigada.setLibre(rs.getBoolean("libre"));
+                Cuartel cuartel=brid.buscarCuartel(rs.getInt("nro_cuartel"));
+                brigada.setCuartel(cuartel);
+                
+                brigadas.add(brigada);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        }
+
+        return brigadas;
+    }
+      
+      public void modificarBrigada(Brigada brigada) {
+          
+//          `CodBrigada``NombreBr``Especialidad``Libre``NroCuartel`
+        String sql = "UPDATE brigada SET NombreBr = ?, Especialidad = ?, Libre = ?, NroCuartel = ? WHERE CodBrigada = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, brigada.getNombreBr());
+            ps.setString(2, brigada.getEspecialidad());
+            ps.setBoolean(3, brigada.isLibre());
+            ps.setInt(4, brigada.getCuartel().getCodCuartel());
+            ps.setInt(5, brigada.getCodBrigada());
+            //ps.executeUpdate();
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Brigada Modificada");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        }
+    }
      
 }

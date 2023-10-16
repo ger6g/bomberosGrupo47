@@ -6,14 +6,20 @@
 package bomberosgrupo47.Vistas;
 
 import bomberosgrupo47.accesoADatos.BrigadaData;
+import bomberosgrupo47.accesoADatos.CuartelData;
 import bomberosgrupo47.accesoADatos.SiniestroData;
 import bomberosgrupo47.entidades.Brigada;
+import bomberosgrupo47.entidades.Cuartel;
 import bomberosgrupo47.entidades.Siniestro;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,13 +29,26 @@ import javax.swing.JOptionPane;
 public class SiniestroVista extends javax.swing.JInternalFrame {
 private SiniestroData sinData=new SiniestroData();
 private Siniestro sin=null;
+private Raton raton;
+private String[] especial= {"incendios","salvamento","rescates en montaña","inundaciones","accidentes de tráfico","prevención"};
     /**
      * Creates new form SiniestroVista
      */
     public SiniestroVista() {
         initComponents();
+        transparencia();
         cargarCombo ();
+        CargarCespe();
+        raton=new Raton(jDesktopPane2);
+        jCespe.setSelectedItem(null);
     }
+    
+    public void transparencia(){
+jbSalir.setOpaque(false);
+jbSalir.setContentAreaFilled(false);
+jbSalir.setBorderPainted(false);
+
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,7 +59,15 @@ private Siniestro sin=null;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/fondoSini.png"));
+        Image gen= icono.getImage();
+        jDesktopPane1 = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(gen,0,0,getWidth(),getHeight(),this);
+
+            }
+
+        };
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -50,7 +77,6 @@ private Siniestro sin=null;
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jtTipo = new javax.swing.JTextField();
         jtX = new javax.swing.JTextField();
         jtY = new javax.swing.JTextField();
         jtDetalle = new javax.swing.JTextField();
@@ -66,14 +92,28 @@ private Siniestro sin=null;
         jbSalir = new javax.swing.JButton();
         jdResol = new com.toedter.calendar.JDateChooser();
         jdFecha = new com.toedter.calendar.JDateChooser();
+        jCespe = new javax.swing.JComboBox<>();
+        ImageIcon icono2 = new ImageIcon(getClass().getResource("/imagenes/mapa.png"));
+        Image gen2= icono2.getImage();
+        jDesktopPane2 = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(gen2,0,0,getWidth(),getHeight(),this);
+
+            }
+
+        };
+        jlmarca = new javax.swing.JLabel();
+
+        setPreferredSize(new java.awt.Dimension(1304, 547));
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jDesktopPane1.setPreferredSize(new java.awt.Dimension(1304, 547));
 
         jLabel1.setText("Codigo:");
 
-        jLabel2.setText("Tipo   :");
+        jLabel2.setText("*Tipo   :");
 
-        jLabel3.setText("Fecha :");
+        jLabel3.setText("*Fecha :");
 
         jLabel4.setText("Cordenada X:");
 
@@ -120,6 +160,11 @@ private Siniestro sin=null;
         jLabel10.setText("Siniestro");
 
         jButton5.setText("Asignar brigada");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,12 +172,38 @@ private Siniestro sin=null;
             }
         });
 
-        jbSalir.setText("Salir");
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/botonSalir2.gif"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
             }
         });
+
+        jDesktopPane2.setPreferredSize(new java.awt.Dimension(285, 213));
+        jDesktopPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jDesktopPane2MouseClicked(evt);
+            }
+        });
+
+        jlmarca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pin.png"))); // NOI18N
+
+        jDesktopPane2.setLayer(jlmarca, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
+        jDesktopPane2.setLayout(jDesktopPane2Layout);
+        jDesktopPane2Layout.setHorizontalGroup(
+            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
+                .addGap(0, 247, Short.MAX_VALUE)
+                .addComponent(jlmarca))
+        );
+        jDesktopPane2Layout.setVerticalGroup(
+            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                .addComponent(jlmarca)
+                .addGap(0, 174, Short.MAX_VALUE))
+        );
 
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -143,7 +214,6 @@ private Siniestro sin=null;
         jDesktopPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtTipo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtX, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtY, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtDetalle, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -159,153 +229,147 @@ private Siniestro sin=null;
         jDesktopPane1.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jdResol, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jdFecha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jCespe, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jDesktopPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jCespe, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(245, 245, 245)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton5))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9)
                             .addComponent(jLabel4))
+                        .addGap(9, 9, 9)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(85, 85, Short.MAX_VALUE)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                        .addComponent(jtBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(130, 130, 130))
-                                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                                .addComponent(jtDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(29, 29, 29)
-                                                .addComponent(jLabel1))
-                                            .addComponent(jtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jdResol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jtPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(47, 47, 47))))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(jtX, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtY, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jbGuardar)
-                                .addGap(51, 51, 51)
-                                .addComponent(jbEliminar)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jbNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(199, 199, 199))))))
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jtPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jdFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jdResol, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                .addComponent(jtDetalle)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(jtX, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtY, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(87, 87, 87)
+                        .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(80, 80, 80)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbGuardar)
+                            .addComponent(jbNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbEliminar))
+                        .addGap(349, 349, 349))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(407, 407, 407))))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(170, 170, 170))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(57, 57, 57)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
+                .addGap(73, 73, 73)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jbNuevo)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jbNuevo)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbEliminar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbGuardar))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jCespe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGap(13, 13, 13)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jtX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jtY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jbSalir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5)
-                        .addGap(3, 3, 3))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jtX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jtDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jtDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jdResol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jtPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)))
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jtBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbGuardar)
-                    .addComponent(jbEliminar))
-                .addContainerGap(110, Short.MAX_VALUE))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jdResol, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jtPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jtBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton5))
+                                .addGap(111, 111, 111))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jbSalir)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1288, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1)
-                .addContainerGap())
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
         );
 
         pack();
@@ -318,100 +382,156 @@ private Siniestro sin=null;
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        Siniestro a =(Siniestro)jComboBox1.getSelectedItem();
+//        Siniestro a =(Siniestro)jComboBox1.getSelectedItem();
         //        SiniestroData cargar = new SiniestroData();
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // limpiar campos
-        jtTipo.setText("");
-        jtDetalle.setText("");
-        jtBrigada.setText("");
-        
-        jtX.setText("");
-        jtY.setText("");
-        jdFecha.setDate(new Date ());
-        jdResol.setDate(new Date ());
-       
-        jtPuntos.setText("");
+//        jtTipo.setText("");
+        limpiarCampos();
         sin=null;
 
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // guardar o actualizar   falta terminar!!!
+         // guardar o actualizar   falta terminar!!!
         
-//                  try{
-//                    int nbrigada = Integer.parseInt(jtBrigada.getText());
-//                    BrigadaData bd = new BrigadaData();
-//                    Brigada bri = bd.buscarBrigada(nbrigada);
-//                    
-//                    String tipo=jtTipo.getText();
-//                    String detalle=jtDetalle.getText();
-//                    LocalDate fechaN= jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//                    LocalDate fechaR= jdResol.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();    
-//                    int puntos=Integer.parseInt(jtPuntos.getText());
-//                    int cooX=Integer.parseInt(jtX.getText());
-//                    int cooY=Integer.parseInt(jtY.getText());
-//                     
-////                    boolean est=jrEstado.isSelected();
-//                         
-//                    
-//                      if (tipo.isEmpty()) {
-//                          JOptionPane.showMessageDialog(this, " * campos requeridos ");
-//                          return;
-//                      }
-//                      if (sin == null) {
-//                          if (fechaR==null || bri==null) {
-//                             sin = new Siniestro(tipo, fechaN, cooX, cooY, detalle,puntos); 
-//                          }else{
-//                          sin = new Siniestro(tipo, fechaN, cooX, cooY, detalle,fechaR,puntos,bri);
-//                          sinData.guardarSiniestro(sin);}
-//                          
-//                      } else {
-//                          
-//                          sin.setBrigada(bri);
-//                          sin.setCoordX(cooX);
-//                          sin.setCoordY(cooY);
-//                          sin.setDetalles(detalle);
-//                          sin.setFechaResol(fechaR);
-//                          sin.setFechaSiniestro(fechaR);
-//                          sin.setPuntuacion(puntos);
-//                          sin.setTipo(tipo);
-//                          
-//                          sinData.modificarSiniestro(sin);
-//
-//                      }
-//            
-//                    }catch (NumberFormatException nf){
-//                        JOptionPane.showMessageDialog(this, "error al llenar los campos");
-//                    }
+                  try{
+                      if (jdResol.getDate()!=null && jtBrigada.getText()!=null) {
+                           int nbrigada = Integer.parseInt(jtBrigada.getText());
+                    BrigadaData bd = new BrigadaData();
+                    Brigada bri = bd.buscarBrigada(nbrigada);
+                   
+                   
+                    String detalle=jtDetalle.getText();
+                    
+                    LocalDate fechaR= jdResol.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
+                          
+                          if (jtPuntos.getText().isEmpty()) {
+                              
+                              JOptionPane.showMessageDialog(this, " Si el siniestro se resolvio debe colocar una puntuación ");
+                              return;
+                          }
+                    int puntos=Integer.parseInt(jtPuntos.getText());
+                    int cooX=Integer.parseInt(jtX.getText());
+                    int cooY=Integer.parseInt(jtY.getText());
+                     
+//                    boolean est=jrEstado.isSelected();
+                         
+                    
+                      if (jCespe.getSelectedItem()==null ||jdFecha.getDate()==null ) {
+                          JOptionPane.showMessageDialog(this, " * campos requeridos ");
+                          return;
+                      }
+                      LocalDate fechaN= jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                       String tipo=jCespe.getSelectedItem()+"";
+                      if (sin == null) {
+                          
+                          sin = new Siniestro(tipo, fechaN, cooX, cooY, detalle,fechaR,puntos,bri);
+                          sinData.guardarSiniestro(sin);
+                          bri.setLibre(true);
+                          BrigadaData actual=new BrigadaData();
+                          actual.modificarBrigada(bri);
+                      } else {
+                          
+                          sin.setBrigada(bri);
+                          sin.setCoordX(cooX);
+                          sin.setCoordY(cooY);
+                          sin.setDetalles(detalle);
+                          sin.setFechaResol(fechaN);
+                          sin.setFechaSiniestro(fechaR);
+                          sin.setPuntuacion(puntos);
+                          sin.setTipo(tipo);
+                          bri.setLibre(true);
+                          BrigadaData actual=new BrigadaData();
+                          actual.modificarBrigada(bri);
+                          sinData.modificarSiniestro(sin);
+
+                      }
+                      } else {
+                          BrigadaData bd = new BrigadaData();
+                          Brigada bri = bd.buscarBrigada(1);
+                          if (!jtBrigada.getText().equals("1")) {
+                              int nbrigada = Integer.parseInt(jtBrigada.getText());
+                           
+                              bri = bd.buscarBrigada(nbrigada);
+                              bri.setLibre(false);
+                               BrigadaData actual = new BrigadaData();
+                              actual.modificarBrigada(bri);
+                          }
+  
+                    
+                   
+                    String tipo=jCespe.getSelectedItem()+"";
+                    String detalle=jtDetalle.getText();
+                    LocalDate fechaN= jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    int cooX=Integer.parseInt(jtX.getText());
+                    int cooY=Integer.parseInt(jtY.getText());
+                    if (sin == null) {
+                          
+                         sin = new Siniestro(tipo, fechaN, cooX, cooY, detalle,bri);
+                          sinData.guardarSinResolver(sin);
+                          
+                      } else {
+                          
+                          sin.setBrigada(bri);
+                          sin.setCoordX(cooX);
+                          sin.setCoordY(cooY);
+                          sin.setDetalles(detalle);
+                          sin.setFechaSiniestro(fechaN);
+                          sin.setTipo(tipo);
+                          sinData.modificarSinResolver(sin);
+                         
+                              bri.setLibre(false);
+                               BrigadaData actual = new BrigadaData();
+                              actual.modificarBrigada(bri);
+                          
+                          
+
+                      }
+                      
+                      }
+                      
+            
+                    }catch (NumberFormatException nf){
+                        JOptionPane.showMessageDialog(this, "error al llenar los camposss"+nf);
+                        System.out.println(""+nf);
+                    }
+
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // busqueda por codigo de siniestros
+        limpiarCampos();
         try{
-
-            Siniestro sin =(Siniestro)jComboBox1.getSelectedItem();
-
+//            String d=jComboBox1.getSelectedItem()+"";
+//              sin = sinData.buscarSiniestro(Integer.parseInt(d));
+             sin =(Siniestro)jComboBox1.getSelectedItem();
+            sin=sinData.buscarSiniestro(sin.getCodigo());
             if (sin!=null) {
-
-                jtTipo.setText(sin.getTipo());
+                 
+                setCespe(sin.getTipo());
                 jtDetalle.setText(sin.getDetalles());
                 jtBrigada.setText(sin.getBrigada().getCodBrigada()+"");
                 
                 jtX.setText(sin.getCoordX()+"");
                 jtY.setText(sin.getCoordY()+"");
-                Date date2 = Date.from(sin.getFechaResol().atStartOfDay(ZoneId.systemDefault()).toInstant());
-                jdResol.setDate(date2);
+                jlmarca.setLocation(sin.getCoordX(),sin.getCoordY());
+            jlmarca.setVisible(true);
 
                 Date date = Date.from(sin.getFechaSiniestro().atStartOfDay(ZoneId.systemDefault()).toInstant());
                 jdFecha.setDate(date);
-
+                
+                if (sin.getFechaResol()!=null) {
+                    Date date2 = Date.from(sin.getFechaResol().atStartOfDay(ZoneId.systemDefault()).toInstant());
+                jdResol.setDate(date2);
                 
                 jtPuntos.setText(sin.getPuntuacion()+"");
+                }
+                
 
             }else{
                 JOptionPane.showMessageDialog(this, "intenté otra vez");
@@ -426,9 +546,73 @@ private Siniestro sin=null;
     private void jtXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtXActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtXActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // asignar brigada
+        String espe= jCespe.getSelectedItem()+"";
+        double Distancia=100000;
+        Brigada brigada1=new Brigada();
+        Cuartel cuartel1=new Cuartel();
+        CuartelData busq=new CuartelData();
+        ArrayList<Cuartel> Cuarteles = busq.listarcuartel();
+        Iterator<Cuartel> Iterator2 = Cuarteles.iterator();
+        BrigadaData brigadas=new BrigadaData();
+        Brigada brigada=new Brigada();
+        while (Iterator2.hasNext()) {
+//            boolean sitiene=false;
+            Cuartel cua = Iterator2.next();
+             ArrayList<Brigada> BrigadaPorCuartel =brigadas.buscarBrigadaPorCuartel(cua.getCodCuartel()); 
+            Iterator<Brigada> Iterator3 = BrigadaPorCuartel.iterator();
+            while (Iterator3.hasNext()) {
+            Brigada bri3 = Iterator3.next();
+                if (bri3.getEspecialidad().equals(espe)) {
+                    
+                    int x1=cua.getCoorX();
+                    int x2=sin.getCoordX();
+                    int y1=cua.getCoorY();
+                    int y2=sin.getCoordY();
+                    
+                   int x = x2 - x1;
+                   int y = y2 - y1;
+                    
+                    if (Math.sqrt(x * x + y * y)<Distancia) {
+                        Distancia = Math.sqrt(x * x + y * y);
+                        brigada1=bri3;
+                        cuartel1=cua;
+                        
+                    }
+//                    System.out.println("Distance between the two points is : " + Distancia);
+                    
+                    
+                }
+            
+            }
+
+        }
+        
+        jtBrigada.setText(brigada1.getCodBrigada()+"");
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jDesktopPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDesktopPane2MouseClicked
+       // captura de las cordenadas en el mapa
+        
+        
+            jtX.setText("");
+        jtY.setText("");
+//       raton.actualizar(this);
+//        jLabel3.setText(raton.obtenerPo().setY()+"");
+raton.actualizar(jDesktopPane2);
+        jtX.setText((int)raton.obtenerPo().getX()+"");
+        jtY.setText((int)raton.obtenerPo().getY()+"");
+        jlmarca.setVisible(true);
+        jlmarca.setLocation((int)raton.obtenerPo().getX(),(int)raton.obtenerPo().getY());
+        jlmarca.setVisible(true);
+        
+    }//GEN-LAST:event_jDesktopPane2MouseClicked
 private void cargarCombo (){
 SiniestroData busca=new SiniestroData();
-ArrayList<Siniestro> lista=busca.obtenerSiniestro(); 
+ArrayList<Siniestro> lista=busca.obtenerSiniestro2(); 
 
     for (int i = 0; i < lista.size(); i++) {
 //   alumno p=new alumno(lista.get(i).getIdAlumno(),lista.get(i).getDni(),lista.get(i).getApellido(),lista.get(i).getNombre(),lista.get(i).getFechaNac(),lista.get(i).isActivo());
@@ -441,8 +625,10 @@ ArrayList<Siniestro> lista=busca.obtenerSiniestro();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jCespe;
     private javax.swing.JComboBox<Siniestro> jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -459,11 +645,48 @@ ArrayList<Siniestro> lista=busca.obtenerSiniestro();
     private javax.swing.JButton jbSalir;
     private com.toedter.calendar.JDateChooser jdFecha;
     private com.toedter.calendar.JDateChooser jdResol;
+    private javax.swing.JLabel jlmarca;
     private javax.swing.JTextField jtBrigada;
     private javax.swing.JTextField jtDetalle;
     private javax.swing.JTextField jtPuntos;
-    private javax.swing.JTextField jtTipo;
     private javax.swing.JTextField jtX;
     private javax.swing.JTextField jtY;
     // End of variables declaration//GEN-END:variables
+ 
+    private void CargarCespe(){
+
+        
+        for (int i = 0; i < especial.length; i++) {
+            jCespe.addItem(especial[i]);
+
+        }
+
+    }
+    private void setCespe(String ep){
+
+        
+        for (int i = 0; i < especial.length; i++) {
+            
+            if (especial[i].equals(ep)) {
+                jCespe.setSelectedIndex(i);
+               
+            }
+
+        }
+
+    }
+    public void limpiarCampos(){
+    jCespe.setSelectedItem(null);
+        jtDetalle.setText("");
+        jtBrigada.setText("");
+        
+        jtX.setText("");
+        jtY.setText("");
+        jdFecha.setDate(null);
+        jdResol.setDate(null);
+       
+        jtPuntos.setText("");
+    
+    }
+
 }
