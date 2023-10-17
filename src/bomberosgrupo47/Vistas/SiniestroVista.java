@@ -127,11 +127,14 @@ jbSalir.setBorderPainted(false);
 
         jLabel9.setText("brigada asignada:");
 
+        jtX.setEditable(false);
         jtX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtXActionPerformed(evt);
             }
         });
+
+        jtY.setEditable(false);
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -453,7 +456,7 @@ jbSalir.setBorderPainted(false);
                       } else {
                           BrigadaData bd = new BrigadaData();
                           Brigada bri = bd.buscarBrigada(1);
-                          if (!jtBrigada.getText().equals("1")) {
+                          if (!jtBrigada.getText().equals("1")&&!jtBrigada.getText().equals("")) {
                               int nbrigada = Integer.parseInt(jtBrigada.getText());
                            
                               bri = bd.buscarBrigada(nbrigada);

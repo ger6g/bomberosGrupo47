@@ -88,6 +88,10 @@ jButton1.setBorderPainted(false);
         };
         jlmarca = new javax.swing.JLabel();
 
+        setForeground(new java.awt.Color(51, 51, 255));
+        setToolTipText("");
+        setFrameIcon(null);
+
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cartsalir.jpg"))); // NOI18N
@@ -111,7 +115,11 @@ jButton1.setBorderPainted(false);
 
         jLabel4.setText("Cordenada X:");
 
+        jtX.setEditable(false);
+
         jLabel5.setText("Y:");
+
+        jtY.setEditable(false);
 
         jLabel6.setText("Telefono:");
 
@@ -284,14 +292,14 @@ jButton1.setBorderPainted(false);
                             .addComponent(jLabel8)
                             .addComponent(jrEstado)))
                     .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
                 .addGap(32, 32, 32)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135))
+                .addGap(138, 138, 138))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
