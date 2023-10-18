@@ -39,7 +39,7 @@ public class BomberoData {
             ps.setInt(1, bombero.getDni());
             ps.setString(2, bombero.getNombreApellido());
             //ps.setDate(3,Date.valueOf(bombero.getFechaNac()));
-            ps.setDate(3, bombero.getFechaNac());
+            ps.setDate(3,Date.valueOf(bombero.getFechaNac()) );
             ps.setString(4, bombero.getCelular());
             ps.setInt(5, bombero.getBrigada().getCodBrigada());
             ps.executeUpdate();
@@ -67,7 +67,7 @@ public class BomberoData {
 
             ps.setString(1, bombero.getNombreApellido());
 
-            ps.setDate(2, bombero.getFechaNac());
+            ps.setDate(2,Date.valueOf(bombero.getFechaNac()));
             ps.setInt(3, bombero.getBrigada().getCodBrigada());
             ps.setInt(4, bombero.getDni());
             ps.setString(5, bombero.getCelular());
@@ -97,7 +97,7 @@ public class BomberoData {
                 bombero = new Bombero();
                 bombero.setIdBombero(id);
                 bombero.setNombreApellido(rs.getString("NombreApellido"));
-                bombero.setFechaNac(rs.getDate("FechaNac"));
+                bombero.setFechaNac(rs.getDate("FechaNac").toLocalDate());
                 //  bombero.setCodBrigada(rs.getInt("codBrigada"));
                 Brigada brigada = brid.buscarBrigada(rs.getInt("codBrigada"));
                 bombero.setBrigada(brigada);
@@ -153,7 +153,7 @@ public class BomberoData {
                 bomber.setIdBombero(rs.getByte("idBombero"));
                 bomber.setDni(rs.getInt("dni"));
                 bomber.setNombreApellido(rs.getNString("NombreApellido"));
-                bomber.setFechaNac(rs.getDate("FechaNac"));
+                bomber.setFechaNac(rs.getDate("FechaNac").toLocalDate());
                 bomber.setCelular(rs.getString("Celular"));
                 bombero.add(bomber);
                 ps.close();

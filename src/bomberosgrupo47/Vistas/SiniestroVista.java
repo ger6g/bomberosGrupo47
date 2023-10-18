@@ -592,7 +592,9 @@ jbSalir.setBorderPainted(false);
             }
 
         }
-        
+        if (brigada1.getCodBrigada()+""=="0") {
+            jtBrigada.setText(brigada1.getCodBrigada()+"1");
+        }else
         jtBrigada.setText(brigada1.getCodBrigada()+"");
         
     }//GEN-LAST:event_jButton5ActionPerformed

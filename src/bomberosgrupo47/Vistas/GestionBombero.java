@@ -151,6 +151,11 @@ jBsiniestro.setBorderPainted(false);
                 jBbomberoMouseExited(evt);
             }
         });
+        jBbombero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbomberoActionPerformed(evt);
+            }
+        });
 
         jBsiniestro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bSiniestro.png"))); // NOI18N
         jBsiniestro.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -391,6 +396,14 @@ jBsiniestro.setBorderPainted(false);
         jDesktopPane1.add(sinies);
         jDesktopPane1.moveToFront(sinies);
     }//GEN-LAST:event_jBsiniestroActionPerformed
+
+    private void jBbomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbomberoActionPerformed
+        // TODO add your handling code here:
+         BomberoVista bom=new BomberoVista();
+        bom.setVisible(true);
+        jDesktopPane1.add(bom);
+        jDesktopPane1.moveToFront(bom);
+    }//GEN-LAST:event_jBbomberoActionPerformed
 
     /**
      * @param args the command line arguments

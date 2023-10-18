@@ -6,6 +6,7 @@
 package bomberosgrupo47.entidades;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Bombero {
     private int idBombero;
     private int dni;
     private String NombreApellido;
-    private Date FechaNac;
+    private LocalDate FechaNac;
     private String Celular;
     private Brigada brigada;
     
@@ -24,7 +25,7 @@ public class Bombero {
     public Bombero() {
     }
 
-    public Bombero(int idBombero, int dni, String NombreApellido, Date FechaNac, String Celular, Brigada brigada) {
+    public Bombero(int idBombero, int dni, String NombreApellido, LocalDate FechaNac, String Celular, Brigada brigada) {
         this.idBombero = idBombero;
         this.dni = dni;
         this.NombreApellido = NombreApellido;
@@ -33,7 +34,7 @@ public class Bombero {
         this.brigada = brigada;
     }
 
-    public Bombero(int dni, String NombreApellido, Date FechaNac, String Celular, Brigada brigada) {
+    public Bombero(int dni, String NombreApellido, LocalDate FechaNac, String Celular, Brigada brigada) {
         this.dni = dni;
         this.NombreApellido = NombreApellido;
         this.FechaNac = FechaNac;
@@ -65,11 +66,11 @@ public class Bombero {
         this.NombreApellido = NombreApellido;
     }
 
-    public Date getFechaNac() {
+    public LocalDate getFechaNac() {
         return FechaNac;
     }
 
-    public void setFechaNac(Date FechaNac) {
+    public void setFechaNac(LocalDate FechaNac) {
         this.FechaNac = FechaNac;
     }
 
