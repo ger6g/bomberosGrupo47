@@ -25,7 +25,7 @@ public class BomberoVista extends javax.swing.JInternalFrame {
 
     private BomberoData bomdata = new BomberoData ();
     private Bombero bomberoActual=null;
-    private JDateChooser eee;
+    
     
     
     /**
@@ -252,7 +252,7 @@ public class BomberoVista extends javax.swing.JInternalFrame {
         jtidbombero.setText("");
         jtdni.setText("");
         jtnombreapellido.setText("");
-        eee.setDate(null);
+       
         jtnrocelular.setText("");
         jtcodbrigada.setText("");
         jrestado.setSelected(true);
@@ -311,7 +311,7 @@ public class BomberoVista extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // buscar un bombero
-
+                     
         try {
             int code=Integer.parseInt(jtidbombero.getText());
             int idBombero = code;
@@ -355,7 +355,7 @@ public class BomberoVista extends javax.swing.JInternalFrame {
             
             jtdni.setText("");
             jtnombreapellido.setText("");
-            eee.setDate(null);
+            
             jtnrocelular.setText("");
             jtcodbrigada.setText("");
             jrestado.setSelected(true);

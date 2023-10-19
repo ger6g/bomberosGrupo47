@@ -55,13 +55,16 @@ CuartelData da=new CuartelData();
 //cua=da.buscarCuartel(1);
 //        System.out.println(cua.toString());
 
-        ArrayList<Cuartel> Cuarteles = da.listarcuartel();
-        Iterator<Cuartel> Iterator2 = Cuarteles.iterator();
-        while (Iterator2.hasNext()) {
-            Cuartel elemento = Iterator2.next();
-            System.out.print(elemento.toString());
+//        ArrayList<Cuartel> Cuarteles = da.listarcuartel();
+//        Iterator<Cuartel> Iterator2 = Cuarteles.iterator();
+//        while (Iterator2.hasNext()) {
+//            Cuartel elemento = Iterator2.next();
+//            System.out.print(elemento.toString());
+//
+//        }
 
-        }
+
+
         
     }
     
