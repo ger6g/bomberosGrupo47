@@ -276,6 +276,9 @@
         <Component class="javax.swing.JTextField" name="jtPuntos">
         </Component>
         <Component class="javax.swing.JTextField" name="jtBrigada">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>

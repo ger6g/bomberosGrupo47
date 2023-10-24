@@ -344,6 +344,12 @@ jButton1.setBorderPainted(false);
                  JOptionPane.showMessageDialog(this," * campos requeridos ");
                 return ;
              }
+             
+             if (!jtTel.getText().matches("^[1-9]\\d*$")) {
+                  JOptionPane.showMessageDialog(this," ingrese un nomero de telefono valido ");
+                return ;
+            }
+             
              if (cua==null) {
 //               Cuartel(String NombreCuartel, String Direccion, int CoorX, int CoorY, String Telefono, String Correo,boolean activo)
                  cua=new Cuartel(nom,pe,corX,corY,tel,correo,est);

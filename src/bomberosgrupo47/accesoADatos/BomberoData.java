@@ -165,5 +165,29 @@ public class BomberoData {
         return bombero;
 
     }
+      public ArrayList<Bombero> listarBomberosXbrig(int cod) {
+        String sql = "SELECT idBombero, dni, NombreApellido, FechaNac, Celular FROM bombero WHERE CodBrigada=?";
+        ArrayList<Bombero> bombero = new ArrayList();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, cod);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Bombero bomber = new Bombero();
+                bomber.setIdBombero(rs.getByte("idBombero"));
+                bomber.setDni(rs.getInt("dni"));
+                bomber.setNombreApellido(rs.getNString("NombreApellido"));
+                bomber.setFechaNac(rs.getDate("FechaNac").toLocalDate());
+                bomber.setCelular(rs.getString("Celular"));
+                bombero.add(bomber);
+                ps.close();
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero");
+        }
+        return bombero;
+
+    }
 
 }

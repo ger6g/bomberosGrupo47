@@ -50,7 +50,7 @@ public class BomberosGrupo47 {
 ////bom2.modificarBombero(bom);
 //System.out.println(bom2.buscarBombero(1));
 
-CuartelData da=new CuartelData();
+//CuartelData da=new CuartelData();
 //Cuartel cua=new Cuartel();
 //cua=da.buscarCuartel(1);
 //        System.out.println(cua.toString());
@@ -63,7 +63,8 @@ CuartelData da=new CuartelData();
 //
 //        }
 
-
+BrigadaData d=new BrigadaData();
+        System.out.println("s"+d.BrigadaEspacio(5));
 
         
     }

@@ -89,7 +89,7 @@ public class BrigadaData {
 //SELECT `NombreBr``Especialidad``Libre``NroCuartel` FROM `brigada` WHERE `CodBrigada`
 
 //     SELECT `CodBrigada`, `NombreBr`, `Especialidad`, `Libre` FROM `brigada` WHERE NroCuartel=?
-        String sql = "SELECT CodBrigada, NombreBr, Especialidad, Libre, NroCuartel FROM brigada WHERE  NroCuartel = ?" ;
+        String sql = "SELECT CodBrigada, NombreBr, Especialidad,  NroCuartel FROM brigada WHERE  NroCuartel = ? AND Libre=1" ;
         
         
         ArrayList<Brigada> brig = new ArrayList();
@@ -114,7 +114,7 @@ public class BrigadaData {
                 brigada.setCodBrigada(rs.getInt("CodBrigada"));
                 brigada.setNombreBr(rs.getString("NombreBr"));
                 brigada.setEspecialidad(rs.getString("Especialidad"));
-                brigada.setLibre(rs.getBoolean("Libre"));
+//                brigada.setLibre(rs.getBoolean("Libre"));
                Cuartel cuartel=brid.buscarCuartel(rs.getInt("NroCuartel"));
                brigada.setCuartel(cuartel);
                brig.add(brigada);
@@ -182,5 +182,72 @@ public class BrigadaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
         }
     }
+      
+      public Brigada buscarBrigadaPorEsp (int id,String esp1){
+//SELECT `NombreBr``Especialidad``Libre``NroCuartel` FROM `brigada` WHERE `CodBrigada`
+        String sql = "SELECT NombreBr, NroCuartel FROM brigada WHERE  CodBrigada = ? AND Especialidad=? AND Libre=1" ;
+        
+        Brigada brigada=null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setString(2, esp1);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                
+                brigada=new Brigada();
+               brigada.setCodBrigada(id);
+                brigada.setNombreBr(rs.getString("NombreBr"));
+//                brigada.setEspecialidad(rs.getString("Especialidad"));
+//                brigada.setLibre(true);
+               Cuartel cuartel=brid.buscarCuartel(rs.getInt("NroCuartel"));
+               brigada.setCuartel(cuartel);
+
+            } else {
+                            
+                JOptionPane.showMessageDialog(null, "no se encontro brigada");
+                
+            }
+                ps.close();   
+                    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        }
+    
+            return brigada;
+}
+      
+      
+       public boolean BrigadaEspacio (int id){
+//SELECT `NombreBr``Especialidad``Libre``NroCuartel` FROM `brigada` WHERE `CodBrigada`
+//        String sql = "SELECT NombreBr, Especialidad, Libre, NroCuartel FROM brigada WHERE  CodBrigada = ?" ;
+     String sql ="SELECT COUNT(`CodBrigada`) FROM bombero WHERE CodBrigada=?";
+
+        boolean brigada=true;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                
+              int conteo = rs.getInt(1);
+                if (conteo>6) {
+                    brigada=false;
+                }
+              
+
+            } else {
+                            
+                JOptionPane.showMessageDialog(null, "Brigada ??");
+                
+            }
+                ps.close();   
+                    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        }
+    
+            return brigada;
+}
      
 }

@@ -19,6 +19,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -135,6 +136,8 @@ jbSalir.setBorderPainted(false);
         });
 
         jtY.setEditable(false);
+
+        jtBrigada.setEditable(false);
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -327,8 +330,7 @@ jbSalir.setBorderPainted(false);
                                             .addComponent(jCespe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel2))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                        .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(13, 13, 13)
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
@@ -417,6 +419,10 @@ jbSalir.setBorderPainted(false);
                               JOptionPane.showMessageDialog(this, " Si el siniestro se resolvio debe colocar una puntuación ");
                               return;
                           }
+                          if (!(jtPuntos.getText().matches("[1-9]|10")) ) {
+                            JOptionPane.showMessageDialog(this, " la puntuacion debe se de o a 10 ");
+                              return;  
+                          }
                     int puntos=Integer.parseInt(jtPuntos.getText());
                     int cooX=Integer.parseInt(jtX.getText());
                     int cooY=Integer.parseInt(jtY.getText());
@@ -454,9 +460,15 @@ jbSalir.setBorderPainted(false);
 
                       }
                       } else {
+                          if (!(jtPuntos.getText().equalsIgnoreCase(""))) {
+                             JOptionPane.showMessageDialog(this, "solo puede ingresar una nota al finalizar el siniestro"); 
+                             jtPuntos.setText("");
+                             return;
+                          }
+                          
                           BrigadaData bd = new BrigadaData();
-                          Brigada bri = bd.buscarBrigada(1);
-                          if (!jtBrigada.getText().equals("1")&&!jtBrigada.getText().equals("")) {
+                          Brigada bri = bd.buscarBrigada(0);
+                          if (!jtBrigada.getText().equals("0")&&!jtBrigada.getText().equals("")) {
                               int nbrigada = Integer.parseInt(jtBrigada.getText());
                            
                               bri = bd.buscarBrigada(nbrigada);
@@ -499,7 +511,7 @@ jbSalir.setBorderPainted(false);
                       
             
                     }catch (NumberFormatException nf){
-                        JOptionPane.showMessageDialog(this, "error al llenar los camposss"+nf);
+                        JOptionPane.showMessageDialog(this, "error al llenar los campos"+nf);
                         System.out.println(""+nf);
                     }
 
@@ -553,13 +565,59 @@ jbSalir.setBorderPainted(false);
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // asignar brigada
         String espe= jCespe.getSelectedItem()+"";
-        double Distancia=100000;
         Brigada brigada1=new Brigada();
         Cuartel cuartel1=new Cuartel();
+        BrigadaData brigadas=new BrigadaData();
+        if (!jtBrigada.getText().equalsIgnoreCase("0")) {
+            boolean aux=false;
+           
+            int opcion = JOptionPane.showConfirmDialog(null, "brigada ya fue asignada ¿desea modificarla manualmente?", "Confirmación", JOptionPane.OK_CANCEL_OPTION);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            // El usuario hizo clic en "Aceptar"
+           String brm = JOptionPane.showInputDialog("Por favor, ingrese una brigada:");
+
+        // Comprueba si el usuario ingresó un texto
+        if (brm != null && brm.matches("^[0-9]+$")) {
+            
+            brigada1=brigadas.buscarBrigadaPorEsp(Integer.parseInt(brm),espe);
+            if (brigada1==null) {
+                return;
+            }else{
+            
+            System.out.println("Texto ingresado: " + brm);
+            brigada1=brigadas.buscarBrigada(Integer.parseInt(jtBrigada.getText()));
+            brigada1.setLibre(true);
+            brigadas.modificarBrigada(brigada1);
+            jtBrigada.setText(brm);
+            return;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "ingrese un numero entero valido");
+           
+        }
+            
+        } else {
+            // El usuario hizo clic en "Cancelar" o cerró el cuadro de diálogo
+            
+            return;
+        }
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        double Distancia=100000;
+        
         CuartelData busq=new CuartelData();
         ArrayList<Cuartel> Cuarteles = busq.listarcuartel();
         Iterator<Cuartel> Iterator2 = Cuarteles.iterator();
-        BrigadaData brigadas=new BrigadaData();
+        
         Brigada brigada=new Brigada();
         while (Iterator2.hasNext()) {
 //            boolean sitiene=false;
@@ -592,10 +650,12 @@ jbSalir.setBorderPainted(false);
             }
 
         }
-        if (brigada1.getCodBrigada()+""=="0") {
-            jtBrigada.setText(brigada1.getCodBrigada()+"1");
-        }else
-        jtBrigada.setText(brigada1.getCodBrigada()+"");
+        String bx=brigada1.getCodBrigada()+"";
+        if (bx.equalsIgnoreCase("0")) {
+            JOptionPane.showMessageDialog(this, "no se encuentran brigadas disponibles para afrontar ese tipo de siniestro");
+            
+        }
+        jtBrigada.setText(bx);
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -668,7 +728,9 @@ ArrayList<Siniestro> lista=busca.obtenerSiniestro2();
 
     }
     private void setCespe(String ep){
-
+   
+    
+    
         
         for (int i = 0; i < especial.length; i++) {
             

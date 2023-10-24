@@ -276,6 +276,11 @@ jBsiniestro.setBorderPainted(false);
         jMenu5.add(jMenuItem5);
 
         jMenuItem6.setText("Brigadas por cuartel");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem6);
 
         jMenuBar1.add(jMenu5);
@@ -297,7 +302,19 @@ jBsiniestro.setBorderPainted(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+         // Consulta de los Bomberos por Brigada
+        
+        //EMPIEZA aca
+        
+//        jDesktopPane1.removeAll();
+//        jDesktopPane1.repaint();
+        ConsultaDeBomberosPorBrigada conpbrig= new ConsultaDeBomberosPorBrigada ();
+        conpbrig.setVisible(true);
+        
+        jDesktopPane1.add(conpbrig);
+        jDesktopPane1.moveToFront (conpbrig);
+        
+        //TERMINA aca
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
@@ -404,6 +421,21 @@ jBsiniestro.setBorderPainted(false);
         jDesktopPane1.add(bom);
         jDesktopPane1.moveToFront(bom);
     }//GEN-LAST:event_jBbomberoActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+         // Consulta de Brigadas por Cuartel
+        
+        //EMPIEZA aca
+        
+        
+        ConsultaDeBrigadasPorCuartel bpc= new ConsultaDeBrigadasPorCuartel ();
+        bpc.setVisible(true);
+        
+        jDesktopPane1.add(bpc);
+        jDesktopPane1.moveToFront (bpc);
+        
+        //TERMINA aca
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
