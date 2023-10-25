@@ -243,5 +243,62 @@ public class SiniestroData {
        return siniestros;
 }
 
+    public int ayerHoySiniestro() {
+//`Codigo``tipo``FechaSiniestro``CoordX``CoordY``Detalles``FechaResol``Puntuacion``CodBrigada`
+        String sql = "SELECT COUNT(`tipo`) FROM `siniestro` WHERE DATE(`FechaSiniestro`) BETWEEN  CURDATE() - INTERVAL 1 DAY AND CURDATE()";
+
+        int contador = 0;
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                 contador = rs.getInt(1); // Obtenemos el resultado del COUNT
+                
+                
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "SINIESTRO no encontrado con ese CODIGO");
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla SINIESTRO");
+        }
+        return contador;
+    }
     
+//    SELECT COUNT(`tipo`) FROM `siniestro`;
+    public int TotalSiniestro() {
+//`Codigo``tipo``FechaSiniestro``CoordX``CoordY``Detalles``FechaResol``Puntuacion``CodBrigada`
+        String sql = "SELECT COUNT(`tipo`) FROM `siniestro`";
+
+        int contador = 0;
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                 contador = rs.getInt(1); // Obtenemos el resultado del COUNT
+               
+                
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "SINIESTRO no encontrado ");
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla SINIESTRO");
+        }
+        return contador;
+    }
 }

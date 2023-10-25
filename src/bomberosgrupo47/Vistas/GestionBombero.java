@@ -5,10 +5,14 @@
  */
 package bomberosgrupo47.Vistas;
 
+import bomberosgrupo47.accesoADatos.SiniestroData;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -16,6 +20,7 @@ import javax.swing.JDesktopPane;
  */
 public class GestionBombero extends javax.swing.JFrame {
 //    private escritorioP escritorio;
+    private Timer timer ;
 
     /**
      * Creates new form GestionBombero
@@ -23,10 +28,46 @@ public class GestionBombero extends javax.swing.JFrame {
     public GestionBombero() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setSize(1300, 600);
+        this.setSize(1300, 750);
         transparencia();
 //        escritorio= new escritorioP();
 //        this.setContentPane(escritorio);
+SiniestroData sini=new SiniestroData();
+
+int tiempoEspera = 150; //  en milisegundos
+        
+String tex="                                                                                                                                                             "
+        + "  Total de Siniestros : "+sini.TotalSiniestro()+"            Siniestros que han ocurrido entre ayer y hoy : "+sini.ayerHoySiniestro();
+      
+      final int[] contador = {0};
+ActionListener cargarinfo = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // carga el texto del banner inferior
+               
+                
+                String info = tex;
+
+                if (tex.length() > contador[0]) {
+                    info = info.substring(contador[0]); // Borra la primera letra y asigna el resultado a info
+                    jlInfo.setText(info);
+                } else {
+                    info = ""; 
+                     contador[0] = 0;
+                     jlInfo.setText(info);
+                }
+                
+                contador[0]++; 
+                
+
+            }
+        };
+                
+        timer = new Timer(tiempoEspera, cargarinfo);
+        timer.start(); 
+
+
+
     }
     
 public void transparencia(){
@@ -75,6 +116,26 @@ jBsiniestro.setBorderPainted(false);
         jBcuartel = new javax.swing.JButton();
         jBbombero = new javax.swing.JButton();
         jBsiniestro = new javax.swing.JButton();
+        ImageIcon icono2 = new ImageIcon(getClass().getResource("/imagenes/bannerInfo.png"));
+        Image gen2= icono2.getImage();
+        jDesktopPane3 = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(gen2,0,0,getWidth(),getHeight(),this);
+
+            }
+
+        };
+        jlInfo = new javax.swing.JLabel();
+        ImageIcon icono3 = new ImageIcon(getClass().getResource("/imagenes/bannerInfo2b.png"));
+        Image gen3= icono3.getImage();
+        jDesktopPane4 = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(gen3,0,0,getWidth(),getHeight(),this);
+
+            }
+
+        };
+        jlTitulos = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMCuartel = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -91,8 +152,15 @@ jBsiniestro.setBorderPainted(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocation(new java.awt.Point(160, 100));
-        setPreferredSize(new java.awt.Dimension(1304, 600));
+        setPreferredSize(new java.awt.Dimension(1304, 700));
         setResizable(false);
+        setSize(new java.awt.Dimension(1304, 700));
+
+        jDesktopPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jDesktopPane1MouseEntered(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bSalir.png"))); // NOI18N
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,7 +252,7 @@ jBsiniestro.setBorderPainted(false);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(333, Short.MAX_VALUE)
+                .addContainerGap(372, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,7 +275,7 @@ jBsiniestro.setBorderPainted(false);
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jBcuartel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,6 +288,57 @@ jBsiniestro.setBorderPainted(false);
                 .addGap(42, 42, 42)
                 .addComponent(jBbombero, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jDesktopPane3.setBackground(new java.awt.Color(204, 255, 255));
+
+        jlInfo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jlInfo.setForeground(new java.awt.Color(0, 0, 204));
+        jlInfo.setText(" ");
+
+        jDesktopPane3.setLayer(jlInfo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane3Layout = new javax.swing.GroupLayout(jDesktopPane3);
+        jDesktopPane3.setLayout(jDesktopPane3Layout);
+        jDesktopPane3Layout.setHorizontalGroup(
+            jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(jlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 793, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDesktopPane3Layout.setVerticalGroup(
+            jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        jDesktopPane4.setBackground(new java.awt.Color(204, 255, 255));
+
+        jlTitulos.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
+        jlTitulos.setForeground(new java.awt.Color(51, 153, 255));
+        jlTitulos.setText("Menu principal");
+        jlTitulos.setFocusTraversalPolicyProvider(true);
+
+        jDesktopPane4.setLayer(jlTitulos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane4Layout = new javax.swing.GroupLayout(jDesktopPane4);
+        jDesktopPane4.setLayout(jDesktopPane4Layout);
+        jDesktopPane4Layout.setHorizontalGroup(
+            jDesktopPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane4Layout.createSequentialGroup()
+                .addGap(246, 246, 246)
+                .addComponent(jlTitulos, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDesktopPane4Layout.setVerticalGroup(
+            jDesktopPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane4Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jlTitulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
         );
 
         jMCuartel.setText("Cuartel");
@@ -291,11 +410,19 @@ jBsiniestro.setBorderPainted(false);
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jDesktopPane4)
             .addComponent(jDesktopPane1)
+            .addComponent(jDesktopPane3)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jDesktopPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -305,7 +432,7 @@ jBsiniestro.setBorderPainted(false);
          // Consulta de los Bomberos por Brigada
         
         //EMPIEZA aca
-        
+        jlTitulos.setText("Consultas");
 //        jDesktopPane1.removeAll();
 //        jDesktopPane1.repaint();
         ConsultaDeBomberosPorBrigada conpbrig= new ConsultaDeBomberosPorBrigada ();
@@ -395,20 +522,31 @@ jBsiniestro.setBorderPainted(false);
 
     private void jBcuartelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcuartelActionPerformed
         // Boton del menu principal
+        jlTitulos.setText("Cuarteles");
         cuartelVista cua=new cuartelVista();
+        timer.stop();
+        jlInfo.setText("");
         cua.setVisible(true);
         jDesktopPane1.add(cua);
         jDesktopPane1.moveToFront(cua);
     }//GEN-LAST:event_jBcuartelActionPerformed
 
     private void jBbrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbrigadaActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here: brigadaVista
+        jlTitulos.setText("Brigadas");
+        brigadaVista brig=new brigadaVista();
+        brig.setVisible(true);
+        jDesktopPane1.add(brig);
+        jDesktopPane1.moveToFront(brig);
         
     }//GEN-LAST:event_jBbrigadaActionPerformed
 
     private void jBsiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsiniestroActionPerformed
         // TODO add your handling code here:
+        jlTitulos.setText("Siniestros");
         SiniestroVista sinies=new SiniestroVista();
+        timer.stop();
+        jlInfo.setText("");
         sinies.setVisible(true);
         jDesktopPane1.add(sinies);
         jDesktopPane1.moveToFront(sinies);
@@ -416,6 +554,7 @@ jBsiniestro.setBorderPainted(false);
 
     private void jBbomberoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbomberoActionPerformed
         // TODO add your handling code here:
+        jlTitulos.setText("Bomberos");
          BomberoVista bom=new BomberoVista();
         bom.setVisible(true);
         jDesktopPane1.add(bom);
@@ -427,7 +566,7 @@ jBsiniestro.setBorderPainted(false);
         
         //EMPIEZA aca
         
-        
+        jlTitulos.setText("Consultas");
         ConsultaDeBrigadasPorCuartel bpc= new ConsultaDeBrigadasPorCuartel ();
         bpc.setVisible(true);
         
@@ -436,6 +575,13 @@ jBsiniestro.setBorderPainted(false);
         
         //TERMINA aca
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jDesktopPane1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDesktopPane1MouseEntered
+        // TODO add your handling code here:
+        jlTitulos.setText("Menu principal");
+        timer.start();
+        
+    }//GEN-LAST:event_jDesktopPane1MouseEntered
 
     /**
      * @param args the command line arguments
@@ -480,6 +626,8 @@ jBsiniestro.setBorderPainted(false);
     private javax.swing.JButton jBsiniestro;
     private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jDesktopPane3;
+    private javax.swing.JDesktopPane jDesktopPane4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMCuartel;
     private javax.swing.JMenu jMenu2;
@@ -493,5 +641,7 @@ jBsiniestro.setBorderPainted(false);
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JLabel jlInfo;
+    private javax.swing.JLabel jlTitulos;
     // End of variables declaration//GEN-END:variables
 }
