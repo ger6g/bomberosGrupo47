@@ -146,6 +146,39 @@ public class BomberoData {
 
         return bombero;
     }
+     public Bombero buscarBomberoPorDNI(int dni) {
+    
+         Bombero bombero = null;
+    try {
+        
+        String query = "SELECT * FROM bombero WHERE dni = ?";
+        PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, dni);
+            ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            bombero = new Bombero();
+            bombero.setIdBombero(rs.getInt("idBombero"));
+            bombero.setDni(rs.getInt("dni"));
+            bombero.setNombreApellido(rs.getString("nombreApellido"));
+            bombero.setFechaNac(rs.getDate("fechaNac").toLocalDate());
+            bombero.setCelular(rs.getString("celular"));
+            bombero.setGrupoSanguineo(rs.getString("grupoSanguineo"));
+            Brigada brigada = brid.buscarBrigada(rs.getInt("codBrigada"));
+            bombero.setBrigada(brigada);
+            
+            // Aquí puedes cargar otros campos del bombero si es necesario
+            // bombero.setBrigada(...);
+            // bombero.setActivo(...);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        // Cierre de recursos (ResultSet, PreparedStatement, Connection) aquí.
+    }
+
+    return bombero;
+}
 
    
 
@@ -198,5 +231,6 @@ public class BomberoData {
         return bombero;
 
     }
+      
 
 }
