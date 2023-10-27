@@ -5,7 +5,9 @@
  */
 package bomberosgrupo47.Vistas;
 
+import bomberosgrupo47.accesoADatos.CuartelData;
 import bomberosgrupo47.accesoADatos.SiniestroData;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -21,23 +23,34 @@ import javax.swing.Timer;
 public class GestionBombero extends javax.swing.JFrame {
 //    private escritorioP escritorio;
     private Timer timer ;
-
+    
     /**
      * Creates new form GestionBombero
      */
     public GestionBombero() {
+        try {
+    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+        if ("Metal".equals(info.getName())) {
+            javax.swing.UIManager.setLookAndFeel(info.getClassName());
+            break;
+        }
+    }
+} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+    java.util.logging.Logger.getLogger(GestionBombero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+}
         initComponents();
+        
         this.setLocationRelativeTo(null);
         this.setSize(1300, 750);
         transparencia();
 //        escritorio= new escritorioP();
 //        this.setContentPane(escritorio);
 SiniestroData sini=new SiniestroData();
-
+CuartelData cua=new CuartelData();
 int tiempoEspera = 150; //  en milisegundos
         
 String tex="                                                                                                                                                             "
-        + "  Total de Siniestros : "+sini.TotalSiniestro()+"            Siniestros que han ocurrido entre ayer y hoy : "+sini.ayerHoySiniestro();
+        + "  Total de Siniestros : "+sini.TotalSiniestro()+"            Siniestros que han ocurrido entre ayer y hoy : "+sini.ayerHoySiniestro() + "      Cantidad de cuarteles activos registrados : "+cua.candidadDeCuarteles();
       
       final int[] contador = {0};
 ActionListener cargarinfo = new ActionListener() {
@@ -437,7 +450,7 @@ jBsiniestro.setBorderPainted(false);
 //        jDesktopPane1.repaint();
         ConsultaDeBomberosPorBrigada conpbrig= new ConsultaDeBomberosPorBrigada ();
         conpbrig.setVisible(true);
-        
+       
         jDesktopPane1.add(conpbrig);
         jDesktopPane1.moveToFront (conpbrig);
         

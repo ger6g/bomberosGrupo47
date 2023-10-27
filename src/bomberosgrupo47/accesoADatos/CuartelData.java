@@ -108,12 +108,13 @@ public class CuartelData {
             return cuartel;
 }
     public void eliminarCuartel(int id) {
-//        materia a =(materia)jcMateriasCombo.getSelectedItem();
+
         BrigadaData cargar = new BrigadaData();
-//        alumno alu=new alumno ();
+
         ArrayList<Brigada> cursadas= cargar.buscarBrigadaPorCuartel(id);
         if (cursadas == null || cursadas.size() == 0) {
-            String sql = "UPDATE materia SET activo = 0 WHERE idmateria = ?";
+//            UPDATE `cuartel` SET `estado`='0' WHERE `CodCuartel`=1
+            String sql = "UPDATE cuartel SET estado = 0 WHERE CodCuartel = ?;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -122,16 +123,16 @@ public class CuartelData {
             int exito =ps.executeUpdate();
             if(exito==1){
             
-            JOptionPane.showMessageDialog(null, "materia eliminada");
+            JOptionPane.showMessageDialog(null, "cuartel eliminado");
 
         }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel");
 
 
         }
         }else{
-        JOptionPane.showMessageDialog(null, "materia no se puede eliminar porque tiene alumnos cursando");
+        JOptionPane.showMessageDialog(null, "cuartel no se puede eliminar porque tiene brigadas registradas");
         }
         
         
@@ -172,5 +173,35 @@ public class CuartelData {
         }
 
         return Cuarteles;
+    }
+    
+    
+    public int candidadDeCuarteles() {
+//`Codigo``tipo``FechaSiniestro``CoordX``CoordY``Detalles``FechaResol``Puntuacion``CodBrigada`
+        String sql = "SELECT COUNT(`CodCuartel`) FROM `cuartel` WHERE estado=1";
+
+        int contador = 0;
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                 contador = rs.getInt(1); // Obtenemos el resultado del COUNT
+                
+                
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "cuartel no encontrado con ese CODIGO");
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel");
+        }
+        return contador;
     }
 }

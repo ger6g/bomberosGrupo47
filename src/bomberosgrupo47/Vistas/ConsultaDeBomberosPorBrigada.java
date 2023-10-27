@@ -52,6 +52,8 @@ private DefaultTableModel modelo= new DefaultTableModel (){
         jButton1 = new javax.swing.JButton();
         jbBuscarBrigada = new javax.swing.JButton();
 
+        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Consulta de Bomberos por Brigada");
 
@@ -81,6 +83,7 @@ private DefaultTableModel modelo= new DefaultTableModel (){
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbomberos.setSelectionForeground(new java.awt.Color(153, 255, 255));
         jScrollPane1.setViewportView(jtbomberos);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/volver-al-menu-principal.jpeg"))); // NOI18N
@@ -121,7 +124,7 @@ private DefaultTableModel modelo= new DefaultTableModel (){
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -289,15 +289,16 @@ public class BomberoVista extends javax.swing.JInternalFrame {
 //                JOptionPane.showMessageDialog(this," * campos requeridos ");
 //                return ;
 //            }
-            if (bd.BrigadaEspacio(codbrig)==false) {
+            
+
+
+            if (bomberoActual==null) {
+               
+if (bd.BrigadaEspacio(codbrig)==false) {
                  JOptionPane.showMessageDialog(this," la brigada esta completa no se puede agregar un nuevo bombero ");
                  
                     return;
             }
-
-
-            if (bomberoActual==null) {
-//                ,est
                 bomberoActual=new Bombero(idBom,dni,nomape,fechaNac,nrocel,bri);
                 bomdata.guardarBombero(bomberoActual);
             }else {

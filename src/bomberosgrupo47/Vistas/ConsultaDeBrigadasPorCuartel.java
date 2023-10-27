@@ -157,7 +157,7 @@ public class ConsultaDeBrigadasPorCuartel extends javax.swing.JInternalFrame {
             
             
             ArrayList<Brigada> list = new ArrayList<>();
-            list=buscar.buscarBrigadaPorCuartel(code);
+            list=buscar.buscarBrigadaPorCuartel2(code);
             eliminarLimpiar();
         for (int i = 0; i < list.size(); i++) {
                  

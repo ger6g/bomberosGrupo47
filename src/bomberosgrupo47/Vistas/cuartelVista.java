@@ -22,6 +22,7 @@ public class cuartelVista extends javax.swing.JInternalFrame {
 private Cuartel cua=null;
 private CuartelData cdata=new CuartelData();
 private Raton raton;
+
     /**
      * Creates new form cuartelVista
      */
@@ -140,6 +141,11 @@ jButton1.setBorderPainted(false);
         });
 
         jButton4.setText("Eliminar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Nuevo");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -205,13 +211,14 @@ jButton1.setBorderPainted(false);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(227, 227, 227))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(523, 523, 523)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(104, 104, 104)
+                        .addComponent(jrEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -234,24 +241,25 @@ jButton1.setBorderPainted(false);
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtY, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                            .addComponent(jButton5)
-                            .addGap(24, 24, 24)
-                            .addComponent(jButton3)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton4))
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addGap(104, 104, 104)
-                            .addComponent(jrEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(8, 8, 8))))
-                .addGap(38, 38, 38)
+                                .addComponent(jtY, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(38, 38, 38)))
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(176, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(227, 227, 227))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addGap(24, 24, 24)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)
+                        .addGap(186, 186, 186))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,8 +271,8 @@ jButton1.setBorderPainted(false);
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(2, 2, 2)))
-                .addGap(63, 63, 63)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(45, 45, 45)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -292,12 +300,12 @@ jButton1.setBorderPainted(false);
                             .addComponent(jLabel8)
                             .addComponent(jrEstado)))
                     .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(161, 161, 161))
         );
@@ -406,6 +414,8 @@ jButton1.setBorderPainted(false);
             jrEstado.setSelected(cua.isActivo());
             jlmarca.setLocation(cua.getCoorX(),cua.getCoorY());
             jlmarca.setVisible(true);
+           
+            
                 }else{
                     JOptionPane.showMessageDialog(this, "intenté otra vez");
                 }
@@ -432,6 +442,30 @@ raton.actualizar(jDesktopPane2);
         jlmarca.setVisible(true);
         
     }//GEN-LAST:event_jDesktopPane2MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        try{
+            int code=Integer.parseInt(jtCodigo.getText());
+            
+            CuartelData buscar =new CuartelData();
+            cua=cdata.buscarCuartel(code);
+            
+            
+                if (cua!=null) {
+            
+            buscar.eliminarCuartel(code);
+            
+            
+                }else{
+                    JOptionPane.showMessageDialog(this, "cuartel no encontrado intenté otra vez");
+                }
+           
+            
+        }catch (NumberFormatException nf){
+            JOptionPane.showMessageDialog(this, "error al llenar los campos");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

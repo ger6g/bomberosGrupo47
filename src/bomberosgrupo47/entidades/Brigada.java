@@ -16,23 +16,26 @@ public class Brigada {
     private String Especialidad;
     private boolean Libre;
     private Cuartel cuartel;
+    private boolean estado;
 
     public Brigada() {
     }
 
-    public Brigada(int CodBrigada, String NombreBr, String Especialidad, boolean Libre, Cuartel cuartel) {
+    public Brigada(int CodBrigada, String NombreBr, String Especialidad, boolean Libre, Cuartel cuartel,boolean estado) {
         this.CodBrigada = CodBrigada;
         this.NombreBr = NombreBr;
         this.Especialidad = Especialidad;
         this.Libre = Libre;
         this.cuartel = cuartel;
+        this.estado= estado;
     }
 
-    public Brigada(String NombreBr, String Especialidad, boolean Libre, Cuartel cuartel) {
+    public Brigada(String NombreBr, String Especialidad, boolean Libre, Cuartel cuartel,boolean estado) {
         this.NombreBr = NombreBr;
         this.Especialidad = Especialidad;
         this.Libre = Libre;
         this.cuartel = cuartel;
+         this.estado= estado;
     }
 
     public int getCodBrigada() {
@@ -73,6 +76,14 @@ public class Brigada {
 
     public void setCuartel(Cuartel cuartel) {
         this.cuartel = cuartel;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     @Override

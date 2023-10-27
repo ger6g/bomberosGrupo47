@@ -5,6 +5,7 @@
  */
 package bomberosgrupo47.accesoADatos;
 
+import bomberosgrupo47.entidades.Bombero;
 import bomberosgrupo47.entidades.Brigada;
 import bomberosgrupo47.entidades.Cuartel;
 import java.sql.Connection;
@@ -28,14 +29,15 @@ public class BrigadaData {
     
     public void guardarBrigada(Brigada brigada){
 //        `CodBrigada``NombreBr``Especialidad``Libre``NroCuartel`
-    String sql="INSERT INTO brigada (NombreBr, Especialidad, Libre, NroCuartel)"
-                + "VALUES (?,?,?,?)";
+    String sql="INSERT INTO brigada (NombreBr, Especialidad, Libre, NroCuartel,estado)"
+                + "VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, brigada.getNombreBr());
             ps.setString(2, brigada.getEspecialidad());
             ps.setBoolean(3,brigada.isLibre());
             ps.setInt(4,brigada.getCuartel().getCodCuartel());
+            ps.setBoolean(5, true);
             
             ps.executeUpdate();
             
@@ -239,6 +241,103 @@ public class BrigadaData {
             } else {
                             
                 JOptionPane.showMessageDialog(null, "Brigada ??");
+                
+            }
+                ps.close();   
+                    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+        }
+    
+            return brigada;
+}
+         public ArrayList<Brigada> buscarBrigadaPorCuartel2 (int id){
+
+        String sql = "SELECT CodBrigada, NombreBr, Especialidad,Libre,  NroCuartel FROM brigada WHERE  NroCuartel = ? and estado=1" ;
+        
+        
+        ArrayList<Brigada> brig = new ArrayList();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+
+            while(rs.next()){
+                Brigada brigada=new Brigada();
+               
+                brigada.setCodBrigada(rs.getInt("CodBrigada"));
+                brigada.setNombreBr(rs.getString("NombreBr"));
+                brigada.setEspecialidad(rs.getString("Especialidad"));
+               brigada.setLibre(rs.getBoolean("Libre"));
+               Cuartel cuartel=brid.buscarCuartel(rs.getInt("NroCuartel"));
+               brigada.setCuartel(cuartel);
+               brig.add(brigada);
+
+            }
+                ps.close();   
+                    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada"+ex);
+        }
+    
+            return brig;
+}
+    
+         
+         public void eliminarBrigada(int id) {
+
+        BomberoData cargar = new BomberoData();
+
+        ArrayList<Bombero> listBombero= cargar.listarBomberosXbrig(id);
+        if (listBombero == null || listBombero.size() == 0) {
+//            UPDATE brigada SET estado =0 WHERE CodBrigada = 13
+            String sql = "UPDATE brigada SET estado =0 WHERE CodBrigada = ?;";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, id);
+            int exito =ps.executeUpdate();
+            if(exito==1){
+            
+            JOptionPane.showMessageDialog(null, "Brigada eliminado");
+
+        }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
+
+
+        }
+        }else{
+        JOptionPane.showMessageDialog(null, "brigada no se puede eliminar porque tiene bomberos registrados");
+        }
+        
+        
+
+    }
+         
+         public Brigada buscarBrigadaActivas (int id){
+//SELECT `NombreBr``Especialidad``Libre``NroCuartel` FROM `brigada` WHERE `CodBrigada`
+        String sql = "SELECT NombreBr, Especialidad, Libre, NroCuartel FROM brigada WHERE  CodBrigada = ? and estado=1" ;
+        
+        Brigada brigada=null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                
+                brigada=new Brigada();
+               brigada.setCodBrigada(id);
+                brigada.setNombreBr(rs.getString("NombreBr"));
+                brigada.setEspecialidad(rs.getString("Especialidad"));
+                brigada.setLibre(true);
+               Cuartel cuartel=brid.buscarCuartel(rs.getInt("NroCuartel"));
+               brigada.setCuartel(cuartel);
+
+            } else {
+                            
+                JOptionPane.showMessageDialog(null, "Brigada no encontrado con ese ID");
                 
             }
                 ps.close();   
