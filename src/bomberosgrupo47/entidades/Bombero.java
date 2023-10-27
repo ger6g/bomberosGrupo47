@@ -20,26 +20,28 @@ public class Bombero {
     private LocalDate FechaNac;
     private String Celular;
     private Brigada brigada;
-    
+    private String grupoSanguineo;
 
     public Bombero() {
     }
 
-    public Bombero(int idBombero, int dni, String NombreApellido, LocalDate FechaNac, String Celular, Brigada brigada) {
+    public Bombero(int idBombero, int dni, String NombreApellido, LocalDate FechaNac, String Celular,String grupoSanguineo, Brigada brigada) {
         this.idBombero = idBombero;
         this.dni = dni;
         this.NombreApellido = NombreApellido;
         this.FechaNac = FechaNac;
         this.Celular = Celular;
         this.brigada = brigada;
+        this.grupoSanguineo=grupoSanguineo;
     }
 
-    public Bombero(int dni, String NombreApellido, LocalDate FechaNac, String Celular, Brigada brigada) {
+    public Bombero(int dni, String NombreApellido, LocalDate FechaNac, String Celular,String grupoSanguineo, Brigada brigada) {
         this.dni = dni;
         this.NombreApellido = NombreApellido;
         this.FechaNac = FechaNac;
         this.Celular = Celular;
         this.brigada = brigada;
+        this.grupoSanguineo=grupoSanguineo;
     }
 
     public int getIdBombero() {
@@ -89,6 +91,15 @@ public class Bombero {
     public void setBrigada(Brigada brigada) {
         this.brigada = brigada;
     }
+
+    public String getGrupoSanguineo() {
+        return grupoSanguineo;
+    }
+
+    public void setGrupoSanguineo(String grupoSanguineo) {
+        this.grupoSanguineo = grupoSanguineo;
+    }
+    
 
     @Override
     public String toString() {

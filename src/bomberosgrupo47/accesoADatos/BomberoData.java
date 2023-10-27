@@ -32,8 +32,8 @@ public class BomberoData {
 
     public void guardarBombero(Bombero bombero) {
 //        dni`, `NombreApellido`, `FechaNac`, `Celular`, `CodBrigada
-        String sql = "INSERT INTO bombero (dni, NombreApellido, FechaNac, Celular, CodBrigada)"
-                + "VALUES (? ,? ,? ,? ,?)";
+        String sql = "INSERT INTO bombero (dni, NombreApellido, FechaNac, Celular,grupoSanguineo, CodBrigada)"
+                + "VALUES (? ,? ,? ,? ,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, bombero.getDni());
@@ -41,7 +41,8 @@ public class BomberoData {
             //ps.setDate(3,Date.valueOf(bombero.getFechaNac()));
             ps.setDate(3,Date.valueOf(bombero.getFechaNac()) );
             ps.setString(4, bombero.getCelular());
-            ps.setInt(5, bombero.getBrigada().getCodBrigada());
+            ps.setString(5, bombero.getGrupoSanguineo());
+            ps.setInt(6, bombero.getBrigada().getCodBrigada());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -54,12 +55,39 @@ public class BomberoData {
             JOptionPane.showMessageDialog(null, "error 404");
         }
     }
+    
+     public void bajaBombero(int id) {
+        String sql = "DELETE FROM bombero WHERE idBombero = ?";
+
+        try {
+            // Establece el valor del parámetro
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+            
+
+            
+            
+            // Verifica si se eliminó correctamente el bombero
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Bombero dado de Baja");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el Bombero con el ID especificado");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new RuntimeException(e);
+        }
+
+    }
 
     public void modificarBombero(Bombero bombero) {
 //        UPDATE `bombero` SET `idBombero`='[value-1]',`dni`='[value-2]',`NombreApellido`='[value-3]'
 //,`FechaNac`='[value-4]',`Celular`='[value-5]',`CodBrigada`='[value-6]' WHERE 1
 
-        String sql = "UPDATE bombero SET NombreApellido=?, FechaNac=?, CodBrigada=?, dni=?,Celular=?"
+        String sql = "UPDATE bombero SET NombreApellido=?, FechaNac=?, CodBrigada=?, dni=?,Celular=? ,grupoSanguineo=?"
                 + "WHERE idBombero = ?";
 
         try {
@@ -71,7 +99,8 @@ public class BomberoData {
             ps.setInt(3, bombero.getBrigada().getCodBrigada());
             ps.setInt(4, bombero.getDni());
             ps.setString(5, bombero.getCelular());
-            ps.setInt(6, bombero.getIdBombero());
+            ps.setString(6, bombero.getGrupoSanguineo());
+            ps.setInt(7, bombero.getIdBombero());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -85,7 +114,7 @@ public class BomberoData {
 
     public Bombero buscarBombero(int id) {
 //SELECT `dni``NombreApellido``FechaNac``Celular``CodBrigada` FROM `bombero` WHERE `idBombero`
-        String sql = "SELECT NombreApellido, FechaNac, CodBrigada, dni,Celular FROM bombero WHERE  idBombero = ? ";
+        String sql = "SELECT NombreApellido, FechaNac, CodBrigada, dni,Celular,grupoSanguineo FROM bombero WHERE  idBombero = ? ";
 
         Bombero bombero = null;
         try {
@@ -103,7 +132,7 @@ public class BomberoData {
                 bombero.setBrigada(brigada);
                 bombero.setDni(rs.getInt("dni"));
                 bombero.setCelular(rs.getString("celular"));
-
+                bombero.setGrupoSanguineo(rs.getString("grupoSanguineo"));
             } else {
 
                 JOptionPane.showMessageDialog(null, "Bombero no encontrado con ese ID");
@@ -118,32 +147,10 @@ public class BomberoData {
         return bombero;
     }
 
-    public void bajaBombero(int id) {
-        String sql = "DELETE FROM bombero WHERE idBombero = ?";
-
-        try (PreparedStatement statement = con.prepareStatement(sql)) {
-            // Establece el valor del parámetro
-            statement.setInt(1, id);
-
-            // Ejecuta la sentencia DELETE
-            int exit = statement.executeUpdate();
-
-            // Verifica si se eliminó correctamente el bombero
-            if (exit > 0) {
-                JOptionPane.showMessageDialog(null, "Bombero dado de Baja");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró el Bombero con el ID especificado");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-            throw new RuntimeException(e);
-        }
-
-    }
+   
 
     public ArrayList<Bombero> listarBomberos() {
-        String sql = "SELECT idBombero, dni, NombreApellido, FechaNac, Celular, CodBrigada FROM bombero WHERE idBombero != 0";
+        String sql = "SELECT idBombero, dni, NombreApellido, FechaNac, Celular,grupoSanguineo, CodBrigada FROM bombero WHERE idBombero != 0";
         ArrayList<Bombero> bombero = new ArrayList();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -155,6 +162,7 @@ public class BomberoData {
                 bomber.setNombreApellido(rs.getNString("NombreApellido"));
                 bomber.setFechaNac(rs.getDate("FechaNac").toLocalDate());
                 bomber.setCelular(rs.getString("Celular"));
+                 bomber.setGrupoSanguineo(rs.getString("grupoSanguineo"));
                 bombero.add(bomber);
                 ps.close();
             }
@@ -166,7 +174,7 @@ public class BomberoData {
 
     }
       public ArrayList<Bombero> listarBomberosXbrig(int cod) {
-        String sql = "SELECT idBombero, dni, NombreApellido, FechaNac, Celular FROM bombero WHERE CodBrigada=?";
+        String sql = "SELECT idBombero, dni, NombreApellido, FechaNac, Celular,grupoSanguineo FROM bombero WHERE CodBrigada=?";
         ArrayList<Bombero> bombero = new ArrayList();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -179,6 +187,7 @@ public class BomberoData {
                 bomber.setNombreApellido(rs.getNString("NombreApellido"));
                 bomber.setFechaNac(rs.getDate("FechaNac").toLocalDate());
                 bomber.setCelular(rs.getString("Celular"));
+                 bomber.setGrupoSanguineo(rs.getString("grupoSanguineo"));
                 bombero.add(bomber);
                 ps.close();
             }

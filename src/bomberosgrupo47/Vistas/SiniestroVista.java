@@ -106,8 +106,11 @@ jbSalir.setBorderPainted(false);
 
         };
         jlmarca = new javax.swing.JLabel();
+        jlCuartel = new javax.swing.JLabel();
         jlInfo = new javax.swing.JLabel();
         jlAsignar = new javax.swing.JLabel();
+        jlCuartel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1304, 547));
 
@@ -233,26 +236,38 @@ jbSalir.setBorderPainted(false);
 
         jlmarca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pin.png"))); // NOI18N
 
+        jlCuartel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pin2.png"))); // NOI18N
+
         jDesktopPane2.setLayer(jlmarca, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane2.setLayer(jlCuartel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
         jDesktopPane2.setLayout(jDesktopPane2Layout);
         jDesktopPane2Layout.setHorizontalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
-                .addGap(0, 247, Short.MAX_VALUE)
+                .addComponent(jlCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                 .addComponent(jlmarca))
         );
         jDesktopPane2Layout.setVerticalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                .addComponent(jlmarca)
+                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jlCuartel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlmarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 174, Short.MAX_VALUE))
         );
 
-        jDesktopPane1.add(jDesktopPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(423, 188, -1, -1));
+        jDesktopPane1.add(jDesktopPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
         jDesktopPane1.add(jlInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 56, 592, 21));
         jDesktopPane1.add(jlAsignar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 236, 64));
+
+        jlCuartel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pin2.png"))); // NOI18N
+        jDesktopPane1.add(jlCuartel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, -1, -1));
+
+        jLabel11.setText("= ubicacion de cuartel");
+        jDesktopPane1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -441,6 +456,16 @@ jbSalir.setBorderPainted(false);
                 jtX.setText(sin.getCoordX()+"");
                 jtY.setText(sin.getCoordY()+"");
                 jlmarca.setLocation(sin.getCoordX(),sin.getCoordY());
+                
+                if (sin.getBrigada().getCodBrigada()!=0) {
+                    Brigada bri=sin.getBrigada();
+                Cuartel cuartel=bri.getCuartel();
+                jlCuartel.setLocation(cuartel.getCoorX(),cuartel.getCoorY());
+                jlCuartel.setVisible(true);
+                }else
+                    jlCuartel.setLocation(0,0);
+                
+                
             jlmarca.setVisible(true);
 
                 Date date = Date.from(sin.getFechaSiniestro().atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -560,8 +585,19 @@ jbSalir.setBorderPainted(false);
         if (bx.equalsIgnoreCase("0")) {
             JOptionPane.showMessageDialog(this, "no se encuentran brigadas disponibles para afrontar ese tipo de siniestro");
             
+               jlCuartel.setLocation(0,0);
+            
         }
+        double distancia= ((double)Math.round(Distancia * 100d) / 100d);
+     
+       JOptionPane.showMessageDialog(this,"se asignara automaticamente la brigada\nmas sercana que corresponda a\nla espesialidad requerida\n    \nEl cuartel mas proximo al \nSiniestro se encuentra a : "+distancia*7.8 + " km "+"\n brigada asignada: "+brigada1.getNombreBr()+" Codigo: "+brigada1.getCodBrigada(),"            Distacia : ",JOptionPane.PLAIN_MESSAGE,new ImageIcon("src/imagenes/Bombero-16.gif"));
+        jtBrigada.setText(brigada1.getCodBrigada()+"");
         jtBrigada.setText(bx);
+        
+                Cuartel cuartel=brigada1.getCuartel();
+                jlCuartel.setLocation(cuartel.getCoorX(),cuartel.getCoorY());
+                jlCuartel.setVisible(true);
+                
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -618,6 +654,7 @@ ArrayList<Siniestro> lista=busca.obtenerSiniestro2();
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -633,6 +670,8 @@ ArrayList<Siniestro> lista=busca.obtenerSiniestro2();
     private com.toedter.calendar.JDateChooser jdFecha;
     private com.toedter.calendar.JDateChooser jdResol;
     private javax.swing.JLabel jlAsignar;
+    private javax.swing.JLabel jlCuartel;
+    private javax.swing.JLabel jlCuartel1;
     private javax.swing.JLabel jlInfo;
     private javax.swing.JLabel jlmarca;
     private javax.swing.JTextField jtBrigada;

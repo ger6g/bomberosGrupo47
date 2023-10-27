@@ -318,7 +318,9 @@ private String[] especial= {"incendios","salvamento","rescates en montaña","inu
         String nomb=jtnombre_br.getText();
         String espec=jCespe.getSelectedItem()+"";
         cua = cdata.buscarCuartel(Integer.parseInt(jt_nro_cuartel.getText()));
-        
+             if (cua==null) {
+                 return;
+             }
         boolean lib=jrlibre.isSelected();
             if (nomb.isEmpty()) {
                 JOptionPane.showMessageDialog(this,"llene todos los campos");
