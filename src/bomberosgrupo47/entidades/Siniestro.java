@@ -22,21 +22,23 @@ public class Siniestro {
     private LocalDate FechaResol;
     private int Puntuacion;
     private Brigada brigada;
+    private boolean estado;
 
     public Siniestro() {
     }
 
-    public Siniestro(String tipo, LocalDate FechaSiniestro, int CoordX, int CoordY, String Detalles,  Brigada brigada) {
+    public Siniestro(String tipo, LocalDate FechaSiniestro, int CoordX, int CoordY, String Detalles,  Brigada brigada,boolean estado) {
         this.tipo = tipo;
         this.FechaSiniestro = FechaSiniestro;
         this.CoordX = CoordX;
         this.CoordY = CoordY;
         this.Detalles = Detalles;
         this.brigada = brigada;
+        this.estado=estado;
     }
     
 
-    public Siniestro(int Codigo, String tipo, LocalDate FechaSiniestro, int CoordX, int CoordY, String Detalles, LocalDate FechaResol, int Puntuacion, Brigada brigada) {
+    public Siniestro(int Codigo, String tipo, LocalDate FechaSiniestro, int CoordX, int CoordY, String Detalles, LocalDate FechaResol, int Puntuacion, Brigada brigada,boolean estado) {
         this.Codigo = Codigo;
         this.tipo = tipo;
         this.FechaSiniestro = FechaSiniestro;
@@ -46,9 +48,10 @@ public class Siniestro {
         this.FechaResol = FechaResol;
         this.Puntuacion = Puntuacion;
         this.brigada = brigada;
+        this.estado=estado;
     }
 
-    public Siniestro(String tipo, LocalDate FechaSiniestro, int CoordX, int CoordY, String Detalles, LocalDate FechaResol, int Puntuacion, Brigada brigada) {
+    public Siniestro(String tipo, LocalDate FechaSiniestro, int CoordX, int CoordY, String Detalles, LocalDate FechaResol, int Puntuacion, Brigada brigada,boolean estado) {
         this.tipo = tipo;
         this.FechaSiniestro = FechaSiniestro;
         this.CoordX = CoordX;
@@ -57,6 +60,7 @@ public class Siniestro {
         this.FechaResol = FechaResol;
         this.Puntuacion = Puntuacion;
         this.brigada = brigada;
+        this.estado=estado;
     }
 
     public int getCodigo() {
@@ -130,6 +134,15 @@ public class Siniestro {
     public void setBrigada(Brigada brigada) {
         this.brigada = brigada;
     }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
 
     @Override
     public String toString() {

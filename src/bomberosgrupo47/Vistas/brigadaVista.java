@@ -87,6 +87,12 @@ private String[] especial= {"incendios","salvamento","rescates en montaña","inu
 
         jLabel2.setText("codBrigada");
 
+        jtcodbrigada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtcodbrigadaActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("especialidad");
 
         jLabel6.setText("nombre_brigada");
@@ -246,7 +252,7 @@ private String[] especial= {"incendios","salvamento","rescates en montaña","inu
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 39, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -267,8 +273,13 @@ private String[] especial= {"incendios","salvamento","rescates en montaña","inu
 
     private void jbBuscarBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarBrigadaActionPerformed
         // TODO add your handling code here:
+        
             try{
             int code=Integer.parseInt(jtcodbrigada.getText());
+                if (code==0) {
+                    JOptionPane.showMessageDialog(this, "brigada no registrada");
+                    return;
+                }
             
             bri=adata.buscarBrigadaActivas(code);
             
@@ -368,6 +379,10 @@ private String[] especial= {"incendios","salvamento","rescates en montaña","inu
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jtcodbrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtcodbrigadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtcodbrigadaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

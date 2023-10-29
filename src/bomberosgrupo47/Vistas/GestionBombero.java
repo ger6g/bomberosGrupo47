@@ -153,11 +153,11 @@ jBsiniestro.setBorderPainted(false);
         jMCuartel = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -372,28 +372,51 @@ jBsiniestro.setBorderPainted(false);
         jMenuBar1.add(jMCuartel);
 
         jMenu2.setText("Brigada");
-
-        jMenuItem1.setText("Formulario Brigada");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenu2ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Formulario brigadas");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Bombero");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
 
         jMenuItem8.setText("Formulario Bomberos");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem8);
 
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Siniestro");
 
-        jMenuItem4.setText("formulario Siniestro");
-        jMenu4.add(jMenuItem4);
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Formulario de siniestros");
+        jMenuItem1.setPreferredSize(new java.awt.Dimension(300, 31));
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem1);
 
         jMenuBar1.add(jMenu4);
 
@@ -483,15 +506,14 @@ jBsiniestro.setBorderPainted(false);
         // TODO add your handling code here:
 //        jDesktopPane1.removeAll();
 //        jDesktopPane1.repaint();
+       jlTitulos.setText("Cuarteles");
         cuartelVista cua=new cuartelVista();
+        timer.stop();
+        jlInfo.setText("");
         cua.setVisible(true);
         jDesktopPane1.add(cua);
         jDesktopPane1.moveToFront(cua);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jBbrigadaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBbrigadaMouseEntered
         // TODO add your handling code here:
@@ -596,6 +618,54 @@ jBsiniestro.setBorderPainted(false);
         
     }//GEN-LAST:event_jDesktopPane1MouseEntered
 
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // menu desplegable brigadas
+        jlTitulos.setText("Brigadas");
+        brigadaVista brig=new brigadaVista();
+        brig.setVisible(true);
+        jDesktopPane1.add(brig);
+        jDesktopPane1.moveToFront(brig);
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // menu desplegable Bomberos
+        jlTitulos.setText("Bomberos");
+         BomberoVista bom=new BomberoVista();
+        bom.setVisible(true);
+        jDesktopPane1.add(bom);
+        jDesktopPane1.moveToFront(bom);
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        // menu desplegable Siniestro
+        jlTitulos.setText("Brigadas");
+        brigadaVista brig=new brigadaVista();
+        brig.setVisible(true);
+        jDesktopPane1.add(brig);
+        jDesktopPane1.moveToFront(brig);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code herssssssssssssss
+        jlTitulos.setText("Bomberos");
+         BomberoVista bom=new BomberoVista();
+        bom.setVisible(true);
+        jDesktopPane1.add(bom);
+        jDesktopPane1.moveToFront(bom);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        jlTitulos.setText("Siniestros");
+        SiniestroVista sinies=new SiniestroVista();
+        timer.stop();
+        jlInfo.setText("");
+        sinies.setVisible(true);
+        jDesktopPane1.add(sinies);
+        jDesktopPane1.moveToFront(sinies);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -649,7 +719,7 @@ jBsiniestro.setBorderPainted(false);
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

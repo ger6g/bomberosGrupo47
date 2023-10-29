@@ -84,6 +84,8 @@ public class BomberoVista extends javax.swing.JInternalFrame {
         };
         jButton6 = new javax.swing.JButton();
         jcSangre = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jtdni1 = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(1300, 640));
 
@@ -101,6 +103,7 @@ public class BomberoVista extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Codigo de Brigada");
 
+        jtidbombero.setEditable(false);
         jtidbombero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtidbomberoActionPerformed(evt);
@@ -144,7 +147,7 @@ public class BomberoVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Buscar");
+        jButton2.setText("Buscar por Dni");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -173,6 +176,8 @@ public class BomberoVista extends javax.swing.JInternalFrame {
 
         jcSangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "AB", "O", "A-" }));
 
+        jLabel9.setText("Dni");
+
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -195,6 +200,8 @@ public class BomberoVista extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayer(jDesktopPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jcSangre, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jtdni1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -206,22 +213,27 @@ public class BomberoVista extends javax.swing.JInternalFrame {
                         .addGap(357, 357, 357)
                         .addComponent(jButton1))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
                         .addGap(39, 39, 39)
+                        .addComponent(jLabel2)
+                        .addGap(31, 31, 31)
                         .addComponent(jtdni, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel1))
-                        .addGap(39, 39, 39)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel1))
+                                .addGap(39, 39, 39))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +256,8 @@ public class BomberoVista extends javax.swing.JInternalFrame {
                                         .addComponent(jcSangre, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(82, 82, 82)))
                                 .addComponent(jButton4))
-                            .addComponent(jtidbombero, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jtidbombero, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtdni1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,24 +272,25 @@ public class BomberoVista extends javax.swing.JInternalFrame {
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jButton2)
+                            .addComponent(jtdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel9))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtdni1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jButton6)
-                                .addGap(125, 125, 125))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jtdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2))
-                                .addGap(38, 38, 38)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jtidbombero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)))
+                            .addComponent(jLabel1)
+                            .addComponent(jtidbombero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jtnombreapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -302,8 +316,13 @@ public class BomberoVista extends javax.swing.JInternalFrame {
                             .addComponent(jButton3)
                             .addComponent(jButton4))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(140, Short.MAX_VALUE))
             .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jDesktopPane1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -339,15 +358,8 @@ public class BomberoVista extends javax.swing.JInternalFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // limpiar campos de carga de Bomberos
-        jDate.setDate(null);
-        jtidbombero.setText("");
-        jtdni.setText("");
-        jtnombreapellido.setText("");
-       
-        jtnrocelular.setText("");
-        jtcodbrigada.setText("");
-       
-        bomberoActual = null;
+        limpiarCampos();
+        
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -360,7 +372,7 @@ public class BomberoVista extends javax.swing.JInternalFrame {
             //int idBombero = 0;
             
             
-            int dni=Integer.parseInt(jtdni.getText());
+            int dni=Integer.parseInt(jtdni1.getText());
             String nomape=jtnombreapellido.getText();
             String sangre=jcSangre.getSelectedItem()+"";
             java.util.Date sfecha = jDate.getDate();
@@ -373,6 +385,11 @@ public class BomberoVista extends javax.swing.JInternalFrame {
                               return;
                           }
             
+            
+            if (!jtnrocelular.getText().matches("^[1-9]\\d*$")) {
+                  JOptionPane.showMessageDialog(this," ingrese un nomero de telefono valido ");
+                return ;
+            }
             String nrocel=jtnrocelular.getText();
             int codbrig=Integer.parseInt(jtcodbrigada.getText());
             BrigadaData bd=new BrigadaData();
@@ -385,32 +402,41 @@ public class BomberoVista extends javax.swing.JInternalFrame {
 //                return ;
 //            }
             
-
+            
 
             if (bomberoActual==null) {
-               
-if (bd.BrigadaEspacio(codbrig)==false) {
-                 JOptionPane.showMessageDialog(this," la brigada esta completa no se puede agregar un nuevo bombero ");
-                 
-                    return;
+               if (bd.BrigadaEspacio(codbrig) >= 5) {
+                JOptionPane.showMessageDialog(this, " la brigada esta completa no se puede agregar un nuevo bombero ");
+
+                return;
             }
-                bomberoActual=new Bombero(dni,nomape,fechaNac,nrocel,sangre,bri);
+
+                bomberoActual=new Bombero(dni,nomape,fechaNac,nrocel,sangre,bri,true);
                 bomdata.guardarBombero(bomberoActual);
+                limpiarCampos();
             }else {
+                if (bomberoActual.getBrigada().getCodBrigada()!=bri.getCodBrigada()) {
+                    if (bd.BrigadaEspacio(codbrig) >= 5) {
+                JOptionPane.showMessageDialog(this, " la brigada esta completa no se puede agregar un nuevo bombero ");
+
+                return;
+            }
+                    
+                }
                  int idBombero = Integer.parseInt(jtidbombero.getText());
                 bomberoActual.setIdBombero(idBombero);
                 bomberoActual.setDni(dni);
                 bomberoActual.setNombreApellido(nomape);
                 bomberoActual.setGrupoSanguineo(sangre);
                 bomberoActual.setFechaNac(fechaNac);
-                
+                bomberoActual.setBrigada(bri);
                 //bomberoActual.setActivo(est);
                 bomdata.modificarBombero(bomberoActual);
 
             }
 
         }catch (NumberFormatException nfe){
-            JOptionPane.showMessageDialog(this, "error debe ingresar un Codigo Valido");
+            JOptionPane.showMessageDialog(this, "error debe ingresar un dni / codigo Validos");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -424,9 +450,10 @@ if (bd.BrigadaEspacio(codbrig)==false) {
             bomberoActual=bomdata.buscarBomberoPorDNI(dni);
 
             if (bomberoActual!=null) {
+                jtdni1.setText(bomberoActual.getDni()+"");
                jtidbombero.setText(bomberoActual.getIdBombero()+"");
                 setSanguineo(bomberoActual.getGrupoSanguineo());
-                jtdni.setText(bomberoActual.getDni()+"");
+                
                 jtnombreapellido.setText(bomberoActual.getNombreApellido());
                 LocalDate lc = bomberoActual.getFechaNac();
                 //LocalDate date=java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -455,13 +482,14 @@ if (bd.BrigadaEspacio(codbrig)==false) {
         
         if (bomberoActual!=null) {
         
-            bomdata.bajaBombero(bomberoActual.getIdBombero());
+            bomdata.bajaBomberoXestado(bomberoActual.getIdBombero());
             bomberoActual=null;
             jtidbombero.setText("");
             
             jtdni.setText("");
+            jtdni1.setText("");
             jtnombreapellido.setText("");
-            
+            jDate.setDate(null);
             jtnrocelular.setText("");
             jtcodbrigada.setText("");
             
@@ -510,9 +538,11 @@ if (bd.BrigadaEspacio(codbrig)==false) {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> jcSangre;
     private javax.swing.JTextField jtcodbrigada;
     private javax.swing.JTextField jtdni;
+    private javax.swing.JTextField jtdni1;
     private javax.swing.JTextField jtidbombero;
     private javax.swing.JTextField jtnombreapellido;
     private javax.swing.JTextField jtnrocelular;
@@ -533,4 +563,17 @@ private void setSanguineo(String ep){
         }
 
     }
+private void limpiarCampos(){
+jDate.setDate(null);
+        jtidbombero.setText("");
+        jtdni.setText("");
+        jtdni1.setText("");
+        jtnombreapellido.setText("");
+       
+        jtnrocelular.setText("");
+        jtcodbrigada.setText("");
+       
+        bomberoActual = null;
+
+}
 }

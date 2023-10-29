@@ -32,8 +32,8 @@ public class BomberoData {
 
     public void guardarBombero(Bombero bombero) {
 //        dni`, `NombreApellido`, `FechaNac`, `Celular`, `CodBrigada
-        String sql = "INSERT INTO bombero (dni, NombreApellido, FechaNac, Celular,grupoSanguineo, CodBrigada)"
-                + "VALUES (? ,? ,? ,? ,?,?)";
+        String sql = "INSERT INTO bombero (dni, NombreApellido, FechaNac, Celular,grupoSanguineo, CodBrigada,estado)"
+                + "VALUES (? ,? ,? ,? ,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, bombero.getDni());
@@ -43,6 +43,7 @@ public class BomberoData {
             ps.setString(4, bombero.getCelular());
             ps.setString(5, bombero.getGrupoSanguineo());
             ps.setInt(6, bombero.getBrigada().getCodBrigada());
+            ps.setBoolean(7, true);
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -114,7 +115,7 @@ public class BomberoData {
 
     public Bombero buscarBombero(int id) {
 //SELECT `dni``NombreApellido``FechaNac``Celular``CodBrigada` FROM `bombero` WHERE `idBombero`
-        String sql = "SELECT NombreApellido, FechaNac, CodBrigada, dni,Celular,grupoSanguineo FROM bombero WHERE  idBombero = ? ";
+        String sql = "SELECT NombreApellido, FechaNac, CodBrigada, dni,Celular,grupoSanguineo FROM bombero WHERE  idBombero = ? estado =1 ";
 
         Bombero bombero = null;
         try {
@@ -151,7 +152,7 @@ public class BomberoData {
          Bombero bombero = null;
     try {
         
-        String query = "SELECT * FROM bombero WHERE dni = ?";
+        String query = "SELECT * FROM bombero WHERE dni = ? AND estado=1";
         PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, dni);
             ResultSet rs = ps.executeQuery();
@@ -170,7 +171,12 @@ public class BomberoData {
             // Aquí puedes cargar otros campos del bombero si es necesario
             // bombero.setBrigada(...);
             // bombero.setActivo(...);
-        }
+        }else {
+
+                JOptionPane.showMessageDialog(null, "Bombero no encontrado con ese DNI");
+
+            }
+            ps.close();
     } catch (SQLException e) {
         e.printStackTrace();
     } finally {
@@ -183,7 +189,7 @@ public class BomberoData {
    
 
     public ArrayList<Bombero> listarBomberos() {
-        String sql = "SELECT idBombero, dni, NombreApellido, FechaNac, Celular,grupoSanguineo, CodBrigada FROM bombero WHERE idBombero != 0";
+        String sql = "SELECT idBombero, dni, NombreApellido, FechaNac, Celular,grupoSanguineo, CodBrigada FROM bombero WHERE idBombero != 0 AND estado =1";
         ArrayList<Bombero> bombero = new ArrayList();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -207,7 +213,7 @@ public class BomberoData {
 
     }
       public ArrayList<Bombero> listarBomberosXbrig(int cod) {
-        String sql = "SELECT idBombero, dni, NombreApellido, FechaNac, Celular,grupoSanguineo FROM bombero WHERE CodBrigada=?";
+        String sql = "SELECT idBombero, dni, NombreApellido, FechaNac, Celular,grupoSanguineo FROM bombero WHERE CodBrigada=? AND estado =1";
         ArrayList<Bombero> bombero = new ArrayList();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -232,5 +238,32 @@ public class BomberoData {
 
     }
       
+public void bajaBomberoXestado(int id) {
+//    UPDATE `bombero` SET `estado`=1 WHERE 1;
+        String sql = "UPDATE bombero SET estado =0 WHERE  idBombero = ?";
+
+        try {
+            // Establece el valor del parámetro
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+            
+
+            
+            
+            // Verifica si se eliminó correctamente el bombero
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Bombero dado de Baja");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el Bombero con el ID especificado");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }

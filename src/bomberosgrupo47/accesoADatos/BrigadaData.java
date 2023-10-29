@@ -220,22 +220,22 @@ public class BrigadaData {
 }
       
       
-       public boolean BrigadaEspacio (int id){
+       public int BrigadaEspacio (int id){
 //SELECT `NombreBr``Especialidad``Libre``NroCuartel` FROM `brigada` WHERE `CodBrigada`
 //        String sql = "SELECT NombreBr, Especialidad, Libre, NroCuartel FROM brigada WHERE  CodBrigada = ?" ;
      String sql ="SELECT COUNT(`CodBrigada`) FROM bombero WHERE CodBrigada=?";
 
-        boolean brigada=true;
+       
+        int conteo=0;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs=ps.executeQuery();
+            
             if(rs.next()){
                 
-              int conteo = rs.getInt(1);
-                if (conteo>6) {
-                    brigada=false;
-                }
+               conteo = rs.getInt(1);
+               
               
 
             } else {
@@ -249,7 +249,7 @@ public class BrigadaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada");
         }
     
-            return brigada;
+            return conteo;
 }
          public ArrayList<Brigada> buscarBrigadaPorCuartel2 (int id){
 

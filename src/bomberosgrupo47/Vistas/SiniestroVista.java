@@ -178,6 +178,11 @@ jbSalir.setBorderPainted(false);
         jDesktopPane1.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(808, 282, -1, -1));
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
         jDesktopPane1.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(808, 235, -1, -1));
 
         jbNuevo.setText("Nuevo");
@@ -308,7 +313,7 @@ jbSalir.setBorderPainted(false);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-         // guardar o actualizar   falta terminar!!!
+         // guardar o actualizar   
         
                   try{
                       if (jdResol.getDate()!=null && jtBrigada.getText()!=null) {
@@ -354,7 +359,7 @@ jbSalir.setBorderPainted(false);
                        String tipo=jCespe.getSelectedItem()+"";
                       if (sin == null) {
                           
-                          sin = new Siniestro(tipo, fechaN, cooX, cooY, detalle,fechaR,puntos,bri);
+                          sin = new Siniestro(tipo, fechaN, cooX, cooY, detalle,fechaR,puntos,bri,true);
                           sinData.guardarSiniestro(sin);
                           bri.setLibre(true);
                           BrigadaData actual=new BrigadaData();
@@ -407,7 +412,7 @@ jbSalir.setBorderPainted(false);
                     int cooY=Integer.parseInt(jtY.getText());
                     if (sin == null) {
                           
-                         sin = new Siniestro(tipo, fechaN, cooX, cooY, detalle,bri);
+                         sin = new Siniestro(tipo, fechaN, cooX, cooY, detalle,bri,true);
                           sinData.guardarSinResolver(sin);
                           
                       } else {
@@ -633,12 +638,33 @@ raton.actualizar(jDesktopPane2);
 //        jlAsignar.setVisible(false);
          
     }//GEN-LAST:event_jButton5MouseExited
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // eliminar Siniestro
+        try{
+           
+            
+                if (sin!=null) {
+            
+            sinData.eliminarSiniestro(sin.getCodigo());
+            
+            sin=null;
+            limpiarCampos();
+                }else{
+                    JOptionPane.showMessageDialog(this, "Siniestro no encontrado intenté otra vez");
+                }
+           
+            
+        }catch (NumberFormatException nf){
+            JOptionPane.showMessageDialog(this, "error al llenar los campos");
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
 private void cargarCombo (){
 SiniestroData busca=new SiniestroData();
 ArrayList<Siniestro> lista=busca.obtenerSiniestro2(); 
 
     for (int i = 0; i < lista.size(); i++) {
-//   alumno p=new alumno(lista.get(i).getIdAlumno(),lista.get(i).getDni(),lista.get(i).getApellido(),lista.get(i).getNombre(),lista.get(i).getFechaNac(),lista.get(i).isActivo());
+
         jComboBox1.addItem(lista.get(i));
                 
                
